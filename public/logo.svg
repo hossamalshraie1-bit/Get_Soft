@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%">
+  <defs>
+    <!-- Gold Gradients matching the design -->
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E8C97A" />
+      <stop offset="50%" stop-color="#C9A84C" />
+      <stop offset="100%" stop-color="#9A7A2E" />
+    </linearGradient>
+    <radialGradient id="goldGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#E8C97A" stop-opacity="0.3" />
+      <stop offset="100%" stop-color="#080808" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+
+  <!-- Soft Gold Glow behind the logo -->
+  <circle cx="250" cy="220" r="180" fill="url(#goldGlow)" />
+
+  <!-- The Globe Structure -->
+  <g stroke="url(#goldGrad)" stroke-width="6" fill="none" stroke-linecap="round">
+    <!-- Outer Globe Circle -->
+    <circle cx="250" cy="230" r="130" stroke-width="8" />
+
+    <!-- Latitudes / Horizontal Lines -->
+    <path d="M 124 200 Q 250 220 376 200" />
+    <path d="M 124 260 Q 250 280 376 260" />
+    <path d="M 148 150 Q 250 170 352 150" />
+    <path d="M 148 310 Q 250 330 352 310" />
+
+    <!-- Longitudes / Vertical Curves -->
+    <path d="M 250 100 Q 200 230 250 360" />
+    <path d="M 250 100 Q 300 230 250 360" />
+    <path d="M 250 100 Q 150 230 250 360" stroke-dasharray="5 5" opacity="0.5" />
+    <path d="M 250 100 Q 350 230 250 360" stroke-dasharray="5 5" opacity="0.5" />
+    <path d="M 250 100 L 250 360" />
+  </g>
+
+  <!-- Gold Dynamic Swoosh wrapping the globe -->
+  <path d="M 110 240 C 130 300, 270 340, 390 220 C 350 270, 220 290, 130 250 Z" fill="url(#goldGrad)" />
+  <path d="M 115 220 C 140 280, 290 320, 410 200 C 370 250, 240 270, 140 230 Z" fill="url(#goldGrad)" opacity="0.7" />
+
+  <!-- Technical Circuit traces extending from top-right -->
+  <g stroke="url(#goldGrad)" stroke-width="6" fill="url(#goldGrad)" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Trace 1 (Inner) -->
+    <path d="M 330 160 Q 360 140, 370 90" fill="none" />
+    <circle cx="370" cy="85" r="8" />
+
+    <!-- Trace 2 (Middle) -->
+    <path d="M 350 190 Q 400 160, 410 100" fill="none" />
+    <circle cx="410" cy="95" r="8" />
+
+    <!-- Trace 3 (Outer) -->
+    <path d="M 370 220 Q 440 180, 440 120" fill="none" />
+    <circle cx="440" cy="115" r="8" />
+  </g>
+</svg>
