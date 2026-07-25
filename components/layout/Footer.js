@@ -54,7 +54,7 @@ export default function Footer() {
                 𝕏
               </a>
               <a
-                href="https://instagram.com/getsoft_ye"
+                href="https://instagram.com/getsoft"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="footer__social-link"
@@ -74,7 +74,7 @@ export default function Footer() {
                 in
               </a>
               <a
-                href="https://wa.me/967770000000"
+                href="https://wa.me/967776158797"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="footer__social-link"
@@ -124,16 +124,16 @@ export default function Footer() {
             <div className="footer__contact-item">
               <span className="footer__contact-icon" aria-hidden="true">📞</span>
               <div>
-                <a href="tel:+967770000000" className="footer__contact-text" style={{ color: 'var(--text-secondary)' }}>
-                  +967 770 000 000
+                <a href="tel:+967776158797" className="footer__contact-text" style={{ color: 'var(--text-secondary)' }}>
+                  +967 776 158 797
                 </a>
               </div>
             </div>
             <div className="footer__contact-item">
               <span className="footer__contact-icon" aria-hidden="true">✉️</span>
               <div>
-                <a href="mailto:info@getsoft.ye" className="footer__contact-text" style={{ color: 'var(--text-secondary)' }}>
-                  info@getsoft.ye
+                <a href="mailto:getsoft2025@gmail.com" className="footer__contact-text" style={{ color: 'var(--text-secondary)' }}>
+                  getsoft2025@gmail.com
                 </a>
               </div>
             </div>
