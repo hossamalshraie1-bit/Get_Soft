@@ -2,7 +2,7 @@ import './globals.css'
 import ScrollReveal from '@/components/layout/ScrollReveal'
 
 export const metadata = {
-  metadataBase: new URL('https://getsoft.ye'),
+  metadataBase: new URL('https://getsoft.vercel.app'),
 
   title: {
     default: 'جيت سوفت | شركة برمجيات وتصميم مواقع الويب في الجمهورية اليمنية',
@@ -31,19 +31,19 @@ export const metadata = {
     'جيت سوفت',
   ],
 
-  authors: [{ name: 'Get Soft', url: 'https://getsoft.ye' }],
+  authors: [{ name: 'Get Soft', url: 'https://getsoft.vercel.app' }],
   creator: 'Get Soft',
   publisher: 'Get Soft',
 
   alternates: {
-    canonical: 'https://getsoft.ye',
-    languages: { 'ar-YE': 'https://getsoft.ye' },
+    canonical: 'https://getsoft.vercel.app',
+    languages: { 'ar-YE': 'https://getsoft.vercel.app' },
   },
 
   openGraph: {
     type: 'website',
     locale: 'ar_YE',
-    url: 'https://getsoft.ye',
+    url: 'https://getsoft.vercel.app',
     siteName: 'جيت سوفت',
     title: 'جيت سوفت | شركة برمجيات وتصميم مواقع الويب في اليمن',
     description:
@@ -102,8 +102,8 @@ const organizationSchema = {
   '@type': 'Organization',
   name: 'Get Soft',
   alternateName: 'جيت سوفت',
-  url: 'https://getsoft.ye',
-  logo: 'https://getsoft.ye/logo.png',
+  url: 'https://getsoft.vercel.app',
+  logo: 'https://getsoft.vercel.app/logo.png',
   description:
     'شركة برمجيات متخصصة في تطوير مواقع الويب، تطبيقات الجوال، الأنظمة المؤسسية وتصميم واجهات المستخدم في الجمهورية اليمنية.',
   foundingDate: '2019',
@@ -115,13 +115,13 @@ const organizationSchema = {
   contactPoint: {
     '@type': 'ContactPoint',
     contactType: 'customer service',
-    telephone: '+967-770-000-000',
-    email: 'info@getsoft.ye',
+    telephone: '+967-776-158-797',
+    email: 'getsoft2025@gmail.com',
     availableLanguage: ['Arabic'],
   },
   sameAs: [
     'https://twitter.com/getsoft_ye',
-    'https://instagram.com/getsoft_ye',
+    'https://instagram.com/getsoft2025',
     'https://linkedin.com/company/getsoft',
   ],
   serviceArea: {
@@ -148,13 +148,13 @@ const organizationSchema = {
 const websiteSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
-  url: 'https://getsoft.ye',
+  url: 'https://getsoft.vercel.app',
   name: 'جيت سوفت',
   description: 'شركة برمجيات وتصميم مواقع الويب في اليمن',
   inLanguage: 'ar',
   potentialAction: {
     '@type': 'SearchAction',
-    target: 'https://getsoft.ye/portfolio?q={search_term_string}',
+    target: 'https://getsoft.vercel.app/portfolio?q={search_term_string}',
     'query-input': 'required name=search_term_string',
   },
 }
