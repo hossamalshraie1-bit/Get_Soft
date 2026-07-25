@@ -3,11 +3,9 @@
 import { useState } from 'react'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
-import { sendMessage } from '@/lib/supabase'
 
 export default function ContactClient({ initialSettings }) {
   const [form, setForm] = useState({ name: '', email: '', phone: '', subject: '', message: '' })
-  const [loading, setLoading] = useState(false)
   const [toast, setToast] = useState({ show: false, message: '', type: '' })
 
   const showToastMsg = (message, type = 'success') => {
@@ -21,23 +19,38 @@ export default function ContactClient({ initialSettings }) {
     setForm({ ...form, [e.target.name]: e.target.value })
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
     if (!form.name || !form.email || !form.message) {
       showToastMsg('يرجى ملء جميع الحقول المطلوبة (الاسم، البريد الإلكتروني، الرسالة)', 'error')
       return
     }
 
-    setLoading(true)
-    const res = await sendMessage(form)
-    setLoading(false)
-
-    if (res.success) {
-      showToastMsg('تم إرسال رسالتك بنجاح! سنتواصل معك قريباً.')
-      setForm({ name: '', email: '', phone: '', subject: '', message: '' })
-    } else {
-      showToastMsg('حدث خطأ أثناء إرسال الرسالة. يرجى المحاولة مرة أخرى.', 'error')
+    const settings = {
+      phone: '+966 50 000 0000',
+      ...initialSettings,
     }
+
+    // Format phone number for WhatsApp wa.me link
+    const cleanPhone = settings.phone.replace(/[^0-9]/g, '') || '966500000000'
+
+    // Build elegant pre-filled WhatsApp message
+    const textMessage = `مرحباً Get Soft 👋
+أود التواصل معكم بخصوص مشروع:
+
+👤 *الاسم:* ${form.name}
+📧 *البريد:* ${form.email}
+${form.phone ? `📱 *الجوال:* ${form.phone}\n` : ''}${form.subject ? `📌 *الموضوع:* ${form.subject}\n` : ''}
+💬 *تفاصيل الرسالة:*
+${form.message}`
+
+    const waUrl = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(textMessage)}`
+
+    // Open WhatsApp directly
+    window.open(waUrl, '_blank')
+
+    showToastMsg('جاري توجيهك إلى الواتساب لإرسال رسالتك مباشرة 🚀')
+    setForm({ name: '', email: '', phone: '', subject: '', message: '' })
   }
 
   const settings = {
@@ -74,7 +87,7 @@ export default function ContactClient({ initialSettings }) {
             </h1>
             <div className="gold-divider" />
             <p style={{ fontSize: 'var(--font-size-lg)', color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto', lineHeight: 1.7 }}>
-              سواء كانت لديك فكرة مشروع جديدة أو استفسار عن خدماتنا، نحن هنا لمساعدتك.
+              سواء كانت لديك فكرة مشروع جديدة أو استفسار عن خدماتنا، تواصل معنا مباشرة عبر الواتساب.
             </p>
           </div>
         </section>
@@ -85,7 +98,7 @@ export default function ContactClient({ initialSettings }) {
             <div className="contact-grid">
               {/* Contact Information */}
               <div>
-                <h2 style={{ fontSize: 'var(--font-size-2xl)', marginBottom: 'var(--space-6)', fontWeight: 800 }}>
+                <h2 className="contact-section__title">
                   معلومات <span className="text-gradient">الاتصال</span>
                 </h2>
                 <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-8)', lineHeight: 1.8 }}>
@@ -103,7 +116,7 @@ export default function ContactClient({ initialSettings }) {
                 <div className="contact-info__item">
                   <span className="contact-info__icon" aria-hidden="true">📞</span>
                   <div>
-                    <div className="contact-info__label">الهاتف</div>
+                    <div className="contact-info__label">الهاتف والواتساب</div>
                     <div className="contact-info__value">
                       <a href={`tel:${settings.phone.replace(/\s+/g, '')}`} style={{ color: 'inherit' }}>
                         {settings.phone}
@@ -135,8 +148,8 @@ export default function ContactClient({ initialSettings }) {
 
               {/* Contact Form */}
               <div className="contact-form">
-                <h2 style={{ fontSize: 'var(--font-size-2xl)', marginBottom: 'var(--space-6)', fontWeight: 800 }}>
-                  أرسل لنا <span className="text-gradient">رسالة</span>
+                <h2 className="contact-section__title">
+                  تواصل معنا عبر <span className="text-gradient">الواتساب</span>
                 </h2>
                 <form onSubmit={handleSubmit} aria-label="نموذج الاتصال">
                   <div className="contact-form__grid">
@@ -215,10 +228,9 @@ export default function ContactClient({ initialSettings }) {
                     type="submit"
                     className="btn btn-primary btn--lg"
                     style={{ width: '100%', justifyContent: 'center' }}
-                    disabled={loading}
                     id="submit-contact-form"
                   >
-                    {loading ? 'جاري الإرسال...' : 'إرسال الرسالة 🚀'}
+                    مراسلة عبر الواتساب 💬
                   </button>
                 </form>
               </div>
@@ -228,7 +240,7 @@ export default function ContactClient({ initialSettings }) {
 
         {/* Toast Notification */}
         <div className={`toast ${toast.show ? 'show' : ''} ${toast.type === 'error' ? 'error' : 'success'}`} role="alert" aria-live="assertive">
-          <span>{toast.type === 'error' ? '❌' : '✨'}</span>
+          <span>{toast.type === 'error' ? '❌' : '💬'}</span>
           <span>{toast.message}</span>
         </div>
       </main>

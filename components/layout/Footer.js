@@ -13,7 +13,6 @@ const QUICK_LINKS = [
   { href: '/about', label: 'من نحن' },
   { href: '/portfolio', label: 'أعمالنا' },
   { href: '/contact', label: 'تواصل معنا' },
-  { href: '/admin', label: 'لوحة التحكم' },
 ]
 
 export default function Footer() {

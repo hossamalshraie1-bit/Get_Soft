@@ -698,7 +698,8 @@ textarea.form-control {
   bottom: 0;
   right: 0;
   left: 0;
-  z-index: var(--z-sticky);
+  /* Raise above toast (--z-tooltip:500) so nothing overlaps the nav bar */
+  z-index: var(--z-modal);
   background: rgba(10, 10, 10, 0.92);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
@@ -1194,20 +1195,80 @@ textarea.form-control {
   gap: var(--space-6);
 }
 
-/* Mobile Swipe Strip (hidden on desktop) */
-.services-strip {
+/* Mobile Wheel Carousel (hidden on desktop, shown on mobile home page) */
+.services-wheel {
   display: none;
+  padding: var(--space-4) 0 var(--space-6);
+  touch-action: pan-y;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.services-strip__item {
+/* Stage: overflow:hidden clips the peeking cards below the active card */
+.services-wheel__stage {
+  position: relative;
+  /* Active card height (245px) + peek area (55px) */
+  height: 300px;
+  overflow: hidden;
+}
+
+/* Each card slot — absolutely positioned within the stage */
+.services-wheel__slot {
+  position: absolute;
+  top: 0;
+  /* left:50% + translateX(-50%) = centered; JS handles the per-card offset */
+  left: 50%;
+  width: calc(100vw - 80px);
+  max-width: 296px;
+  will-change: transform, opacity;
+}
+
+/* Dot pagination row */
+.services-wheel__dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: var(--space-5);
+}
+
+.services-wheel__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  border: none;
+  background: var(--border-card);
+  cursor: pointer;
+  padding: 0;
+  transition: all var(--transition-base);
+}
+
+.services-wheel__dot.active {
+  width: 26px;
+  border-radius: 4px;
+  background: var(--gold-primary);
+  box-shadow: 0 0 10px rgba(201, 168, 76, 0.45);
+}
+
+/* Card modifier used inside the wheel (fixed uniform height) */
+.service-card--wheel {
+  /* Height = padding(24+24) + icon(36+8) + title(22+4) + desc(3lines×18+8) + btn(34) ≈ 234px
+     Add a little extra so content breathes → 245px */
+  height: 245px;
+  overflow: hidden;
+  /* flex-start: elements stack naturally at top; btn gets margin-top:auto */
+  justify-content: flex-start;
+  gap: 0;
+}
+
+/* Button inside wheel cards pushed to the bottom */
+.service-card--wheel .btn {
+  margin-top: auto !important;
   flex-shrink: 0;
-  width: 76vw;
-  max-width: 280px;
 }
 
 .service-card {
   background: var(--bg-card);
-  border: 1px solid var(--border-card);
+  border: 1.5px solid var(--gold-border-strong);
   border-radius: var(--radius-xl);
   padding: var(--space-8);
   transition: all var(--transition-base);
@@ -1233,7 +1294,8 @@ textarea.form-control {
 .service-card:hover {
   border-color: var(--gold-border-strong);
   box-shadow: var(--shadow-card-hover), var(--shadow-gold);
-  transform: translateY(-6px);
+  transform: translateY(-3px);
+  border: 2.5px solid var(--gold-border-strong);
 }
 
 .service-card:hover::before {
@@ -1266,14 +1328,14 @@ textarea.form-control {
   font-size: var(--font-size-base);
   color: var(--text-secondary);
   line-height: 1.7;
-  margin-bottom: var(--space-6);
+  margin-bottom: var(--space-2);
 }
 
 .service-card__features {
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
-  margin-bottom: var(--space-6);
+  margin-bottom: var(--space-2);
 }
 
 .service-card__feature {
@@ -1503,6 +1565,34 @@ textarea.form-control {
 .testimonial-card__position {
   font-size: var(--font-size-sm);
   color: var(--gold-primary);
+}
+
+.testimonials-dots {
+  display: none;
+}
+
+/* =============================================
+   About Story
+   ============================================= */
+.about-story__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-12);
+  align-items: center;
+}
+
+.about-story__title {
+  font-size: var(--font-size-3xl);
+  margin-bottom: var(--space-6);
+  font-weight: 800;
+}
+
+.about-story__values {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8);
+  box-shadow: var(--shadow-gold);
 }
 
 /* =============================================
@@ -1777,6 +1867,12 @@ textarea.form-control {
 /* =============================================
    Contact
    ============================================= */
+.contact-section__title {
+  font-size: var(--font-size-2xl);
+  margin-bottom: var(--space-6);
+  font-weight: 800;
+}
+
 .contact-grid {
   display: grid;
   grid-template-columns: 1fr 1.5fr;
@@ -1855,14 +1951,19 @@ textarea.form-control {
   font-weight: 600;
   box-shadow: var(--shadow-card);
   z-index: var(--z-tooltip);
-  transition: transform var(--transition-base);
+  transition: transform var(--transition-base), visibility var(--transition-base);
   display: flex;
   align-items: center;
   gap: var(--space-3);
+  /* Hidden by default — prevent ghost white box from showing */
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .toast.show {
   transform: translateX(-50%) translateY(0);
+  visibility: visible;
+  pointer-events: auto;
 }
 
 .toast.success {
@@ -2134,38 +2235,94 @@ textarea.form-control {
     margin-bottom: var(--space-2);
   }
 
-  /* Cards Grids to 2 Columns */
-  .testimonials-grid,
+  /* Cards Grids to 2 Columns (excluding testimonials) */
   .team-grid {
     grid-template-columns: repeat(2, 1fr) !important;
     gap: 8px !important;
   }
 
-  /* Services home page: hide grid, show swipe strip */
-  .services-grid--home {
-    display: none !important;
-  }
-
-  .services-strip {
+  .testimonials-grid {
     display: flex !important;
     overflow-x: auto !important;
     overflow-y: hidden !important;
     -webkit-overflow-scrolling: touch !important;
     scroll-snap-type: x mandatory !important;
-    gap: var(--space-4) !important;
-    padding: var(--space-2) var(--space-1) var(--space-4) !important;
-    cursor: grab !important;
+    gap: 12px !important;
+    padding: var(--space-2) var(--space-2) var(--space-5) !important;
     scrollbar-width: none !important;
+    margin: 0 calc(-1 * var(--space-3)) !important;
   }
 
-  .services-strip::-webkit-scrollbar {
+  .testimonials-grid::-webkit-scrollbar {
     display: none !important;
   }
 
-  .services-strip .services-strip__item {
+  .testimonials-grid .testimonial-card {
+    flex-shrink: 0 !important;
     scroll-snap-align: start !important;
-    width: 76vw !important;
-    max-width: 260px !important;
+    width: 78vw !important;
+    max-width: 282px !important;
+  }
+
+  .testimonials-dots {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: var(--space-4);
+  }
+
+  .testimonials-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: var(--radius-full);
+    border: none;
+    background: var(--border-card);
+    cursor: pointer;
+    padding: 0;
+    transition: all var(--transition-base);
+  }
+
+  .testimonials-dot.active {
+    width: 26px;
+    border-radius: 4px;
+    background: var(--gold-primary);
+    box-shadow: 0 0 10px rgba(201, 168, 76, 0.45);
+  }
+
+  /* Services page: 1 column layount on phones to avoid compression */
+  .services-grid {
+    grid-template-columns: 1fr !important;
+    gap: var(--space-4) !important;
+  }
+
+  /* Services home page: hide desktop grid, show wheel carousel */
+  .services-grid--home {
+    display: none !important;
+  }
+
+  .services-wheel {
+    display: block !important;
+  }
+
+  /* Wheel slot: same fixed width as the stage positioning */
+  .services-wheel__slot {
+    width: calc(100vw - 80px) !important;
+    max-width: 296px !important;
+  }
+
+  /* All wheel cards: uniform height, content stacks at top, btn at bottom */
+  .service-card--wheel {
+    height: 245px !important;
+    padding: var(--space-3) var(--space-4) !important;
+    border-radius: var(--radius-lg) !important;
+    overflow: hidden !important;
+    justify-content: flex-start !important;
+  }
+
+  /* Stage height must match: card(245) + peek(55) */
+  .services-wheel__stage {
+    height: 300px !important;
   }
 
   /* Portfolio home page: hide desktop grid, show mobile carousel */
@@ -2187,31 +2344,78 @@ textarea.form-control {
     gap: var(--space-6) !important;
   }
 
-  /* Services Card compacting */
-  .service-card {
-    padding: var(--space-3) !important;
-    border-radius: var(--radius-lg) !important;
+  /* Service card in the wheel — compact, tight spacing */
+  .service-card--wheel .service-card__icon {
+    font-size: 1.75rem !important;
+    margin-bottom: 6px !important;
   }
 
-  .service-card__icon {
-    font-size: 1.5rem !important;
-    margin-bottom: var(--space-2) !important;
+  .service-card--wheel .service-card__title {
+    font-size: 0.92rem !important;
+    margin-bottom: 4px !important;
   }
 
-  .service-card__title {
-    font-size: 0.85rem !important;
-    margin-bottom: var(--space-1) !important;
-  }
-
-  .service-card__description {
+  .service-card--wheel .service-card__description {
     font-size: 0.7rem !important;
-    line-height: 1.5 !important;
+    line-height: 1.45 !important;
+    margin-bottom: 0 !important;
+    /* gap to btn handled by btn margin-top:auto */
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3 !important;
+    line-clamp: 3 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+  }
+
+  .service-card--wheel .service-card__features {
+    display: none !important;
+  }
+
+  /* Button inside wheel: sits flush at bottom via margin-top:auto */
+  .service-card--wheel .btn {
+    margin-top: auto !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* Desktop grid cards (non-wheel) on mobile: compact & readable */
+  .service-card:not(.service-card--wheel) {
+    padding: var(--space-5) !important;
+    border-radius: var(--radius-xl) !important;
+    min-height: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+  }
+
+  .service-card:not(.service-card--wheel) .service-card__icon {
+    font-size: 2.25rem !important;
     margin-bottom: var(--space-3) !important;
   }
 
-  .service-card__features {
-    display: none !important;
-    /* Hide checklist for clean 2col on mobile */
+  .service-card:not(.service-card--wheel) .service-card__title {
+    font-size: 1.15rem !important;
+    margin-bottom: var(--space-2) !important;
+  }
+
+  .service-card:not(.service-card--wheel) .service-card__description {
+    font-size: 0.82rem !important;
+    line-height: 1.6 !important;
+    margin-bottom: var(--space-4) !important;
+  }
+
+  .service-card:not(.service-card--wheel) .service-card__features {
+    display: block !important;
+    margin-bottom: var(--space-5) !important;
+  }
+
+  .service-card:not(.service-card--wheel) .service-card__feature {
+    font-size: 0.78rem !important;
+    margin-bottom: var(--space-1) !important;
+  }
+
+  .service-card:not(.service-card--wheel) .btn {
+    margin-top: auto !important;
+    width: 100% !important;
   }
 
   /* Portfolio Card compacting */
@@ -2372,6 +2576,119 @@ textarea.form-control {
   section[aria-labelledby="services-page-heading"] {
     padding-top: 80px !important;
     padding-bottom: var(--space-8) !important;
+  }
+
+  /* Standalone Portfolio Page Tweaks (Reducing spacing & horizontal scrolling filters) */
+  section[aria-labelledby="portfolio-page-heading"] {
+    padding-top: 80px !important;
+    padding-bottom: var(--space-3) !important;
+  }
+
+  /* Pull portfolio items container closer to the page hero */
+  section#portfolio {
+    padding-top: var(--space-4) !important;
+  }
+
+  .portfolio-filter {
+    display: flex !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+    scroll-snap-type: x mandatory !important;
+    flex-wrap: nowrap !important;
+    justify-content: flex-start !important;
+    gap: 8px !important;
+    padding: var(--space-2) var(--space-3) !important;
+    scrollbar-width: none !important;
+    margin: 0 calc(-1 * var(--space-3)) var(--space-5) !important;
+  }
+
+  .portfolio-filter::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .filter-btn {
+    flex-shrink: 0 !important;
+    scroll-snap-align: start !important;
+    padding: 6px 16px !important;
+    font-size: 0.8rem !important;
+  }
+
+  /* Override fixed padding-top for about page hero */
+  section[aria-labelledby="about-heading"] {
+    padding-top: 80px !important;
+    padding-bottom: var(--space-4) !important;
+  }
+
+  /* About Page - Story & Values grid improvements on mobile */
+  .about-story__grid {
+    grid-template-columns: 1fr !important;
+    gap: var(--space-8) !important;
+  }
+
+  .about-story__title {
+    font-size: 1.5rem !important;
+    margin-bottom: var(--space-3) !important;
+    text-align: center;
+  }
+
+  .about-story__values {
+    padding: var(--space-5) !important;
+    border-radius: var(--radius-lg) !important;
+  }
+
+  /* Override fixed padding for contact page hero */
+  section[aria-labelledby="contact-heading"] {
+    padding-top: 80px !important;
+    padding-bottom: var(--space-4) !important;
+  }
+
+  /* Contact page compact layout on mobile */
+  .contact-section__title {
+    font-size: 1.35rem !important;
+    margin-bottom: var(--space-3) !important;
+    text-align: center;
+  }
+
+  .contact-grid {
+    gap: var(--space-6) !important;
+  }
+
+  .contact-info__item {
+    padding: var(--space-3) !important;
+    gap: var(--space-3) !important;
+    margin-bottom: var(--space-3) !important;
+  }
+
+  .contact-info__icon {
+    font-size: 1.25rem !important;
+  }
+
+  .contact-info__label {
+    font-size: 0.72rem !important;
+  }
+
+  .contact-info__value {
+    font-size: 0.82rem !important;
+  }
+
+  .contact-form__grid {
+    grid-template-columns: 1fr !important;
+    gap: var(--space-3) !important;
+  }
+
+  .form-group {
+    margin-bottom: var(--space-3) !important;
+  }
+
+  .form-label {
+    font-size: 0.8rem !important;
+    margin-bottom: var(--space-1) !important;
+  }
+
+  .form-control {
+    padding: var(--space-3) var(--space-4) !important;
+    font-size: 0.85rem !important;
   }
 }
 

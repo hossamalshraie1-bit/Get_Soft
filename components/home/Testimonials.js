@@ -1,3 +1,8 @@
+'use client'
+
+import { useState, useRef, useEffect } from 'react'
+import { getTestimonials } from '@/lib/supabase'
+
 const DEFAULT_TESTIMONIALS = [
   {
     id: 1,
@@ -35,13 +40,82 @@ function StarRating({ rating }) {
   )
 }
 
-export default function Testimonials({ testimonials }) {
-  const activeTestimonials = (testimonials && testimonials.length > 0) ? testimonials : DEFAULT_TESTIMONIALS
+export default function Testimonials({ testimonials = [] }) {
+  const [loadedTestimonials, setLoadedTestimonials] = useState(testimonials)
+
+  // Dynamic client sync with getTestimonials()
+  useEffect(() => {
+    async function fetchLatest() {
+      const data = await getTestimonials()
+      if (data && data.length > 0) {
+        setLoadedTestimonials(data)
+      }
+    }
+    fetchLatest()
+  }, [])
+
+  const activeTestimonials = (loadedTestimonials && loadedTestimonials.length > 0)
+    ? loadedTestimonials
+    : (testimonials && testimonials.length > 0)
+    ? testimonials
+    : DEFAULT_TESTIMONIALS
+
+  const [activeIndex, setActiveIndex] = useState(0)
+  const gridRef = useRef(null)
+
+  // Listen to scroll to update dot indicator active state
+  useEffect(() => {
+    const container = gridRef.current
+    if (!container) return
+
+    const handleScroll = () => {
+      const children = Array.from(container.children)
+      if (children.length === 0) return
+
+      const containerCenter = container.getBoundingClientRect().left + container.offsetWidth / 2
+      let closestIndex = 0
+      let minDiff = Infinity
+
+      children.forEach((child, index) => {
+        const rect = child.getBoundingClientRect()
+        const childCenter = rect.left + rect.width / 2
+        const diff = Math.abs(containerCenter - childCenter)
+        if (diff < minDiff) {
+          minDiff = diff
+          closestIndex = index
+        }
+      })
+
+      setActiveIndex(closestIndex)
+    }
+
+    container.addEventListener('scroll', handleScroll, { passive: true })
+    handleScroll()
+
+    return () => {
+      container.removeEventListener('scroll', handleScroll)
+    }
+  }, [activeTestimonials])
+
+  const scrollToCard = (index) => {
+    if (!gridRef.current) return
+    const container = gridRef.current
+    const child = container.children[index]
+    if (child) {
+      child.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'center',
+      })
+      setActiveIndex(index)
+    }
+  }
+
   return (
     <section
       className="section"
       id="testimonials"
-      style={{ background: 'var(--bg-secondary)' }}
+      style={{ background: 'var(--bg-secondary)', overflow: 'hidden' }}
       aria-labelledby="testimonials-heading"
     >
       <div className="container">
@@ -57,8 +131,8 @@ export default function Testimonials({ testimonials }) {
           </p>
         </div>
 
-        {/* Testimonials Grid */}
-        <div className="testimonials-grid">
+        {/* Testimonials Grid/Scroll-strip */}
+        <div className="testimonials-grid" ref={gridRef}>
           {activeTestimonials.map((testimonial, index) => (
             <div
               key={testimonial.id || index}
@@ -81,7 +155,7 @@ export default function Testimonials({ testimonials }) {
                   {testimonial.avatar_url ? (
                     <img src={testimonial.avatar_url} alt={testimonial.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                   ) : (
-                    testimonial.name.charAt(0)
+                    testimonial.name ? testimonial.name.charAt(0) : '👤'
                   )}
                 </div>
                 <div>
@@ -96,6 +170,20 @@ export default function Testimonials({ testimonials }) {
                 </div>
               </div>
             </div>
+          ))}
+        </div>
+
+        {/* Carousel indicators — mobile only */}
+        <div className="testimonials-dots" role="tablist" aria-label="مؤشرات التقييمات">
+          {activeTestimonials.map((_, index) => (
+            <button
+              key={index}
+              role="tab"
+              aria-selected={index === activeIndex}
+              className={`testimonials-dot${index === activeIndex ? ' active' : ''}`}
+              onClick={() => scrollToCard(index)}
+              aria-label={`التقييم ${index + 1}`}
+            />
           ))}
         </div>
       </div>

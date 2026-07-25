@@ -1,5 +1,6 @@
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
+import TeamSection from '@/components/about/TeamSection'
 import { getTeam } from '@/lib/supabase'
 
 export const metadata = {
@@ -14,16 +15,8 @@ export const metadata = {
   },
 }
 
-const DEFAULT_TEAM = [
-  { name: 'محمد الغامدي', role: 'المدير التقني', bio: 'خبرة أكثر من 8 سنوات في تطوير البرمجيات والأنظمة المؤسسية. متخصص في Next.js وNode.js وقواعد البيانات.' },
-  { name: 'ليلى الشمري', role: 'مصممة UI/UX', bio: 'مصممة إبداعية بخبرة 6 سنوات في تصميم واجهات المستخدم. متخصصة في Figma وتجربة المستخدم.' },
-  { name: 'عمر السعد', role: 'مطور موبايل', bio: 'مطور تطبيقات موبايل محترف بخبرة 5 سنوات في React Native وFlutter. نفّذ أكثر من 40 تطبيقاً ناجحاً.' },
-  { name: 'نورة الحربي', role: 'مديرة المشاريع', bio: 'خبرة في إدارة المشاريع التقنية وتوجيه فرق العمل لضمان جودة التسليم ورضا العملاء.' },
-]
-
 export default async function AboutPage() {
-  const teamData = await getTeam()
-  const team = teamData.length > 0 ? teamData : DEFAULT_TEAM
+  const initialTeam = await getTeam()
 
   return (
     <>
@@ -59,9 +52,9 @@ export default async function AboutPage() {
         {/* Story Section */}
         <section className="section" aria-label="قصتنا وقيمنا">
           <div className="container">
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-12)', alignItems: 'center' }}>
+            <div className="about-story__grid">
               <div>
-                <h2 style={{ fontSize: 'var(--font-size-3xl)', marginBottom: 'var(--space-6)', fontWeight: 800 }}>
+                <h2 className="about-story__title">
                   رؤيتنا <span className="text-gradient">ورسالتنا</span>
                 </h2>
                 <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-base)', lineHeight: 1.8, marginBottom: 'var(--space-4)' }}>
@@ -71,13 +64,7 @@ export default async function AboutPage() {
                   رسالتنا هي تمكين الشركات والمشاريع الناشئة من التحول الرقمي الكامل والسلس من خلال توظيف أفضل الممارسات البرمجية وأحدث التقنيات لإنتاج برمجيات عالية الكفاءة والأمان والسرعة.
                 </p>
               </div>
-              <div style={{
-                background: 'var(--bg-card)',
-                border: '1px solid var(--border-card)',
-                borderRadius: 'var(--radius-xl)',
-                padding: 'var(--space-8)',
-                boxShadow: 'var(--shadow-gold)',
-              }}>
+              <div className="about-story__values">
                 <h3 style={{ fontSize: 'var(--font-size-xl)', color: 'var(--gold-primary)', marginBottom: 'var(--space-4)', fontWeight: 700 }}>
                   قيمنا الأساسية ✨
                 </h3>
@@ -103,38 +90,7 @@ export default async function AboutPage() {
         </section>
 
         {/* Team Section */}
-        <section className="section" style={{ background: 'var(--bg-secondary)' }} aria-labelledby="team-heading">
-          <div className="container">
-            <div className="section-title">
-              <div className="section-title__tag">👥 عائلة جيت سوفت</div>
-              <h2 className="section-title__heading" id="team-heading">
-                فريق عمل <span className="text-gradient">محترف</span>
-              </h2>
-              <div className="gold-divider" />
-              <p className="section-title__description">
-                نخبة من المطورين والمصممين ومهندسي الأنظمة الملتزمين بالتميز والنجاح.
-              </p>
-            </div>
-
-            <div className="team-grid">
-              {team.map((member, index) => (
-                <div key={index} className="team-card">
-                  <div className="team-card__avatar">
-                    {member.avatar_url ? (
-                      <img src={member.avatar_url} alt={member.name} />
-                    ) : (
-                      member.name.charAt(0)
-                    )}
-                  </div>
-                  <h3 className="team-card__name">{member.name}</h3>
-                  <div className="team-card__role">{member.role}</div>
-                  <p className="team-card__bio">{member.bio}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
+        <TeamSection initialTeam={initialTeam} />
       </main>
       <Footer />
     </>

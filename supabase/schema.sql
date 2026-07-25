@@ -14,6 +14,7 @@ CREATE TABLE IF NOT EXISTS projects (
   description TEXT,
   category TEXT NOT NULL CHECK (category IN ('web', 'mobile', 'system', 'uiux', 'ecommerce', 'other')),
   image_url TEXT,
+  images TEXT[] DEFAULT '{}',
   imagekit_file_id TEXT,
   tech_stack TEXT[] DEFAULT '{}',
   client TEXT,
@@ -61,22 +62,7 @@ CREATE TABLE IF NOT EXISTS team (
 );
 
 -- =============================================
--- 4. جدول الرسائل / التواصل
--- =============================================
-CREATE TABLE IF NOT EXISTS messages (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-  name TEXT NOT NULL,
-  email TEXT NOT NULL,
-  phone TEXT,
-  subject TEXT,
-  message TEXT NOT NULL,
-  read BOOLEAN DEFAULT false,
-  replied BOOLEAN DEFAULT false,
-  created_at TIMESTAMPTZ DEFAULT NOW()
-);
-
--- =============================================
--- 5. جدول الإحصائيات
+-- 4. جدول الإحصائيات
 -- =============================================
 CREATE TABLE IF NOT EXISTS stats (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -87,7 +73,7 @@ CREATE TABLE IF NOT EXISTS stats (
 );
 
 -- =============================================
--- 6. جدول الخدمات
+-- 5. جدول الخدمات
 -- =============================================
 CREATE TABLE IF NOT EXISTS services (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -103,7 +89,7 @@ CREATE TABLE IF NOT EXISTS services (
 );
 
 -- =============================================
--- 7. جدول إعدادات الموقع
+-- 6. جدول إعدادات الموقع
 -- =============================================
 CREATE TABLE IF NOT EXISTS site_settings (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -146,11 +132,6 @@ ALTER TABLE team ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "team_public_read" ON team FOR SELECT USING (active = true);
 CREATE POLICY "team_admin_all" ON team FOR ALL USING (auth.role() = 'authenticated');
 
--- messages: كتابة عامة، قراءة للمشرفين فقط
-ALTER TABLE messages ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "messages_public_insert" ON messages FOR INSERT WITH CHECK (true);
-CREATE POLICY "messages_admin_all" ON messages FOR ALL USING (auth.role() = 'authenticated');
-
 -- stats: قراءة عامة
 ALTER TABLE stats ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "stats_public_read" ON stats FOR SELECT USING (true);
@@ -167,7 +148,7 @@ CREATE POLICY "settings_public_read" ON site_settings FOR SELECT USING (true);
 CREATE POLICY "settings_admin_all" ON site_settings FOR ALL USING (auth.role() = 'authenticated');
 
 -- =============================================
--- Seed Data — بيانات تجريبية
+-- Seed Data — بيانات تجريبية اولية
 -- =============================================
 
 -- الإحصائيات
@@ -175,7 +156,8 @@ INSERT INTO stats (label, value, icon, display_order) VALUES
   ('مشروع منجز', '+150', '🚀', 1),
   ('عميل راضٍ', '+80', '🤝', 2),
   ('سنوات خبرة', '+5', '⭐', 3),
-  ('تقنية متقنة', '+20', '💻', 4);
+  ('تقنية متقنة', '+20', '💻', 4)
+ON CONFLICT DO NOTHING;
 
 -- الخدمات
 INSERT INTO services (title, description, icon, features, popular, display_order) VALUES
@@ -226,7 +208,8 @@ INSERT INTO services (title, description, icon, features, popular, display_order
     ARRAY['استضافة سحابية', 'شهادة SSL مجانية', 'نسخ احتياطية', 'مراقبة 24/7', 'دعم فني فوري'],
     false,
     6
-  );
+  )
+ON CONFLICT DO NOTHING;
 
 -- آراء العملاء
 INSERT INTO testimonials (name, position, company, content, rating, display_order) VALUES
@@ -253,14 +236,16 @@ INSERT INTO testimonials (name, position, company, content, rating, display_orde
     'طوروا تطبيق التوصيل الخاص بنا بشكل رائع. واجهة المستخدم سلسة والأداء قوي. الفريق استجاب لكل طلباتنا باحترافية عالية.',
     5,
     3
-  );
+  )
+ON CONFLICT DO NOTHING;
 
 -- بيانات الفريق
 INSERT INTO team (name, role, bio, display_order) VALUES
   ('محمد الغامدي', 'المدير التقني', 'خبرة أكثر من 8 سنوات في تطوير البرمجيات والأنظمة المؤسسية. متخصص في Next.js وNode.js وقواعد البيانات.', 1),
   ('ليلى الشمري', 'مصممة UI/UX', 'مصممة إبداعية بخبرة 6 سنوات في تصميم واجهات المستخدم. متخصصة في Figma وتجربة المستخدم.', 2),
   ('عمر السعد', 'مطور موبايل', 'مطور تطبيقات موبايل محترف بخبرة 5 سنوات في React Native وFlutter. نفّذ أكثر من 40 تطبيقاً ناجحاً.', 3),
-  ('نورة الحربي', 'مديرة المشاريع', 'خبيرة في إدارة المشاريع التقنية بشهادة PMP. تضمن تسليم المشاريع في الوقت المحدد بأعلى جودة.', 4);
+  ('نورة الحربي', 'مديرة المشاريع', 'خبيرة في إدارة المشاريع التقنية بشهادة PMP. تضمن تسليم المشاريع في الوقت المحدد بأعلى جودة.', 4)
+ON CONFLICT DO NOTHING;
 
 -- إعدادات الموقع
 INSERT INTO site_settings (key, value) VALUES
@@ -271,4 +256,5 @@ INSERT INTO site_settings (key, value) VALUES
   ('instagram', 'getsoft_sa'),
   ('twitter', 'getsoft_sa'),
   ('linkedin', 'getsoft'),
-  ('working_hours', 'الأحد - الخميس: 9 صباحاً - 6 مساءً');
+  ('working_hours', 'الأحد - الخميس: 9 صباحاً - 6 مساءً')
+ON CONFLICT DO NOTHING;
