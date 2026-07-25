@@ -6,12 +6,12 @@ import { getProjects } from '@/lib/supabase'
 export const metadata = {
   title: 'أعمالنا | جيت سوفت',
   description:
-    'اكتشف مشاريعنا الناجحة في تطوير مواقع الويب، تطبيقات الجوال، والأنظمة المؤسسية. أكثر من 150 مشروع منجز لعملاء في السعودية والخليج.',
-  alternates: { canonical: 'https://getsoft.sa/portfolio' },
+    'اكتشف مشاريعنا الناجحة في تطوير مواقع الويب، تطبيقات الجوال، والأنظمة المؤسسية. أكثر من 150 مشروع منجز لعملاء في اليمن والوطن العربي.',
+  alternates: { canonical: 'https://getsoft.ye/portfolio' },
   openGraph: {
     title: 'أعمالنا | جيت سوفت',
     description: 'معرض مشاريع جيت سوفت في البرمجة وتصميم المواقع.',
-    url: 'https://getsoft.sa/portfolio',
+    url: 'https://getsoft.ye/portfolio',
   },
 }
 

@@ -27,12 +27,12 @@ export default function ContactClient({ initialSettings }) {
     }
 
     const settings = {
-      phone: '+966 50 000 0000',
+      phone: '+967 770 000 000',
       ...initialSettings,
     }
 
     // Format phone number for WhatsApp wa.me link
-    const cleanPhone = settings.phone.replace(/[^0-9]/g, '') || '966500000000'
+    const cleanPhone = settings.phone.replace(/[^0-9]/g, '') || '967770000000'
 
     // Build elegant pre-filled WhatsApp message
     const textMessage = `مرحباً Get Soft 👋
@@ -54,10 +54,10 @@ ${form.message}`
   }
 
   const settings = {
-    phone: '+966 50 000 0000',
-    email: 'info@getsoft.sa',
-    address: 'الرياض، المملكة العربية السعودية',
-    working_hours: 'الأحد - الخميس: 9 صباحاً - 6 مساءً',
+    phone: '+967 770 000 000',
+    email: 'info@getsoft.ye',
+    address: 'صنعاء، الجمهورية اليمنية',
+    working_hours: 'السبت - الخميس: 9 صباحاً - 6 مساءً',
     ...initialSettings,
   }
 

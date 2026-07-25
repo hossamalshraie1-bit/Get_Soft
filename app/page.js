@@ -2,10 +2,10 @@ import HomeClient from '@/components/HomeClient'
 import { getStats, getServices, getProjects, getTestimonials } from '@/lib/supabase'
 
 export const metadata = {
-  title: 'جيت سوفت | شركة برمجيات وتصميم مواقع الويب في السعودية',
+  title: 'جيت سوفت | شركة برمجيات وتصميم مواقع الويب في الجمهورية اليمنية',
   description:
-    'جيت سوفت — شركة برمجيات متخصصة في تطوير مواقع الويب، تطبيقات الجوال، الأنظمة المؤسسية وتصميم UI/UX. خبرة +5 سنوات، +150 مشروع ناجح في المملكة العربية السعودية.',
-  alternates: { canonical: 'https://getsoft.sa' },
+    'جيت سوفت — شركة برمجيات متخصصة في تطوير مواقع الويب، تطبيقات الجوال، الأنظمة المؤسسية وتصميم UI/UX. خبرة +5 سنوات، +150 مشروع ناجح في الجمهورية اليمنية.',
+  alternates: { canonical: 'https://getsoft.ye' },
 }
 
 export default async function HomePage() {

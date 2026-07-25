@@ -7,11 +7,11 @@ export const metadata = {
   title: 'من نحن | جيت سوفت',
   description:
     'تعرف على شركة جيت سوفت، قصة نجاحنا، قيمنا، ورؤيتنا في تقديم أفضل الحلول البرمجية وتصميم مواقع الويب وتطبيقات الموبايل بأعلى جودة.',
-  alternates: { canonical: 'https://getsoft.sa/about' },
+  alternates: { canonical: 'https://getsoft.ye/about' },
   openGraph: {
     title: 'من نحن | جيت سوفت',
-    description: 'تعرف على قصة نجاح وقيم وفريق عمل جيت سوفت للبرمجيات.',
-    url: 'https://getsoft.sa/about',
+    description: 'تعرف على قصة نجاح وقيم وفريق عمل جيت سوفت للبرمجيات في اليمن.',
+    url: 'https://getsoft.ye/about',
   },
 }
 
@@ -58,7 +58,7 @@ export default async function AboutPage() {
                   رؤيتنا <span className="text-gradient">ورسالتنا</span>
                 </h2>
                 <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-base)', lineHeight: 1.8, marginBottom: 'var(--space-4)' }}>
-                  في <strong>Get Soft</strong>، نسعى لأن نكون الشركة الرائدة في مجال تقديم الحلول البرمجية وتصميم المواقع وتطوير الأنظمة الذكية في العالم العربي. نؤمن بأن التقنية هي عصب الأعمال الحديثة، ولذلك نكرس جهودنا لتقديم منتجات تقنية تفوق توقعات عملائنا.
+                  في <strong>Get Soft</strong>، نسعى لأن نكون الشركة الرائدة في مجال تقديم الحلول البرمجية وتصميم المواقع وتطوير الأنظمة الذكية في اليمن والعالم العربي. نؤمن بأن التقنية هي عصب الأعمال الحديثة، ولذلك نكرس جهودنا لتقديم منتجات تقنية تفوق توقعات عملائنا.
                 </p>
                 <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-base)', lineHeight: 1.8 }}>
                   رسالتنا هي تمكين الشركات والمشاريع الناشئة من التحول الرقمي الكامل والسلس من خلال توظيف أفضل الممارسات البرمجية وأحدث التقنيات لإنتاج برمجيات عالية الكفاءة والأمان والسرعة.

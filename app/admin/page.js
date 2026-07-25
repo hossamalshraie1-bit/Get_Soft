@@ -187,10 +187,10 @@ const DEFAULT_TEAM = [
 const DEFAULT_SETTINGS = {
   hero_title: 'نبني المستقبل الرقمي لشركتك',
   hero_subtitle: 'نطور تطبيقات ومواقع ويب احترافية وأنظمة مؤسسية عالية الجودة تضمن نجاح مشروعك.',
-  phone: '+966 50 000 0000',
-  email: 'info@getsoft.sa',
-  address: 'الرياض، المملكة العربية السعودية',
-  working_hours: 'الأحد - الخميس: 9 صباحاً - 6 مساءً',
+  phone: '+967 770 000 000',
+  email: 'info@getsoft.ye',
+  address: 'صنعاء، الجمهورية اليمنية',
+  working_hours: 'السبت - الخميس: 9 صباحاً - 6 مساءً',
   stat_projects: '50+',
   stat_experience: '+8',
   stat_clients: '100+',
@@ -470,7 +470,19 @@ export default function AdminPage() {
         <main className="min-h-screen flex items-center justify-center" style={{ paddingTop: '130px', paddingBottom: '80px' }}>
           <div className="card" style={{ width: '100%', maxWidth: '420px', margin: '0 auto', padding: 'var(--space-8)' }}>
             <div style={{ textAlign: 'center', marginBottom: 'var(--space-6)' }}>
-              <span style={{ fontSize: '3rem' }}>🔐</span>
+              <img
+                src="/logo.png"
+                alt="Get Soft Logo"
+                style={{
+                  height: '64px',
+                  width: '64px',
+                  margin: '0 auto var(--space-3)',
+                  borderRadius: '14px',
+                  objectFit: 'cover',
+                  boxShadow: '0 6px 20px rgba(201, 168, 76, 0.4)',
+                  border: '1px solid var(--gold-border)',
+                }}
+              />
               <h2 style={{ fontSize: 'var(--font-size-2xl)', fontWeight: 800, marginTop: 'var(--space-3)' }}>
                 لوحة التحكم <span className="text-gradient">Get Soft</span>
               </h2>

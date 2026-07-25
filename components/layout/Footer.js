@@ -24,13 +24,27 @@ export default function Footer() {
         <div className="footer__grid">
           {/* Brand */}
           <div>
-            <div className="footer__brand-name">Get Soft</div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
+              <img
+                src="/logo.png"
+                alt="Get Soft Logo"
+                style={{
+                  height: '44px',
+                  width: '44px',
+                  borderRadius: '10px',
+                  objectFit: 'cover',
+                  boxShadow: '0 4px 12px rgba(201, 168, 76, 0.3)',
+                  border: '1px solid var(--gold-border, rgba(201, 168, 76, 0.4))',
+                }}
+              />
+              <div className="footer__brand-name" style={{ marginBottom: 0 }}>Get Soft</div>
+            </div>
             <p className="footer__brand-desc">
               شركة برمجيات متخصصة في تطوير مواقع الويب الاحترافية، تطبيقات الجوال، الأنظمة المؤسسية وتصميم واجهات المستخدم. نبني حلولاً رقمية تصنع الفارق.
             </p>
             <div className="footer__social" aria-label="روابط التواصل الاجتماعي">
               <a
-                href="https://twitter.com/getsoft_sa"
+                href="https://twitter.com/getsoft_ye"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="footer__social-link"
@@ -40,7 +54,7 @@ export default function Footer() {
                 𝕏
               </a>
               <a
-                href="https://instagram.com/getsoft_sa"
+                href="https://instagram.com/getsoft_ye"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="footer__social-link"
@@ -60,7 +74,7 @@ export default function Footer() {
                 in
               </a>
               <a
-                href="https://wa.me/966500000000"
+                href="https://wa.me/967770000000"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="footer__social-link"
@@ -105,21 +119,21 @@ export default function Footer() {
             <h3 className="footer__heading">تواصل معنا</h3>
             <div className="footer__contact-item">
               <span className="footer__contact-icon" aria-hidden="true">📍</span>
-              <div className="footer__contact-text">الرياض، المملكة العربية السعودية</div>
+              <div className="footer__contact-text">صنعاء، الجمهورية اليمنية</div>
             </div>
             <div className="footer__contact-item">
               <span className="footer__contact-icon" aria-hidden="true">📞</span>
               <div>
-                <a href="tel:+966500000000" className="footer__contact-text" style={{ color: 'var(--text-secondary)' }}>
-                  +966 50 000 0000
+                <a href="tel:+967770000000" className="footer__contact-text" style={{ color: 'var(--text-secondary)' }}>
+                  +967 770 000 000
                 </a>
               </div>
             </div>
             <div className="footer__contact-item">
               <span className="footer__contact-icon" aria-hidden="true">✉️</span>
               <div>
-                <a href="mailto:info@getsoft.sa" className="footer__contact-text" style={{ color: 'var(--text-secondary)' }}>
-                  info@getsoft.sa
+                <a href="mailto:info@getsoft.ye" className="footer__contact-text" style={{ color: 'var(--text-secondary)' }}>
+                  info@getsoft.ye
                 </a>
               </div>
             </div>

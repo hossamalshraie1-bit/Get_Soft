@@ -249,12 +249,12 @@ ON CONFLICT DO NOTHING;
 
 -- إعدادات الموقع
 INSERT INTO site_settings (key, value) VALUES
-  ('phone', '+966 50 000 0000'),
-  ('email', 'info@getsoft.sa'),
-  ('address', 'الرياض، المملكة العربية السعودية'),
-  ('whatsapp', '+966500000000'),
-  ('instagram', 'getsoft_sa'),
-  ('twitter', 'getsoft_sa'),
+  ('phone', '+967 770 000 000'),
+  ('email', 'getsoft2025@gmail.com'),
+  ('address', 'صنعاء، الجمهورية اليمنية'),
+  ('whatsapp', '+967770000000'),
+  ('instagram', 'getsoft_ye'),
+  ('twitter', 'getsoft_ye'),
   ('linkedin', 'getsoft'),
-  ('working_hours', 'الأحد - الخميس: 9 صباحاً - 6 مساءً')
+  ('working_hours', 'السبت - الخميس: 9 صباحاً - 6 مساءً')
 ON CONFLICT DO NOTHING;

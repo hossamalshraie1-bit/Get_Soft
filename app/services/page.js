@@ -7,11 +7,11 @@ export const metadata = {
   title: 'خدماتنا | جيت سوفت',
   description:
     'اكتشف مجموعة خدماتنا التقنية الشاملة: تطوير مواقع الويب، تطبيقات الجوال، الأنظمة المؤسسية، تصميم UI/UX، التجارة الإلكترونية والاستضافة.',
-  alternates: { canonical: 'https://getsoft.sa/services' },
+  alternates: { canonical: 'https://getsoft.ye/services' },
   openGraph: {
     title: 'خدماتنا | جيت سوفت',
-    description: 'خدمات برمجية متكاملة للشركات والمؤسسات في المملكة العربية السعودية.',
-    url: 'https://getsoft.sa/services',
+    description: 'خدمات برمجية متكاملة للشركات والمؤسسات في الجمهورية اليمنية.',
+    url: 'https://getsoft.ye/services',
   },
 }
 
@@ -20,12 +20,12 @@ const serviceSchema = {
   '@type': 'ItemList',
   name: 'خدمات جيت سوفت',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'تطوير مواقع الويب', url: 'https://getsoft.sa/services#web' },
-    { '@type': 'ListItem', position: 2, name: 'تطبيقات الجوال', url: 'https://getsoft.sa/services#mobile' },
-    { '@type': 'ListItem', position: 3, name: 'الأنظمة المؤسسية', url: 'https://getsoft.sa/services#systems' },
-    { '@type': 'ListItem', position: 4, name: 'تصميم UI/UX', url: 'https://getsoft.sa/services#uiux' },
-    { '@type': 'ListItem', position: 5, name: 'التجارة الإلكترونية', url: 'https://getsoft.sa/services#ecommerce' },
-    { '@type': 'ListItem', position: 6, name: 'الاستضافة والصيانة', url: 'https://getsoft.sa/services#hosting' },
+    { '@type': 'ListItem', position: 1, name: 'تطوير مواقع الويب', url: 'https://getsoft.ye/services#web' },
+    { '@type': 'ListItem', position: 2, name: 'تطبيقات الجوال', url: 'https://getsoft.ye/services#mobile' },
+    { '@type': 'ListItem', position: 3, name: 'الأنظمة المؤسسية', url: 'https://getsoft.ye/services#systems' },
+    { '@type': 'ListItem', position: 4, name: 'تصميم UI/UX', url: 'https://getsoft.ye/services#uiux' },
+    { '@type': 'ListItem', position: 5, name: 'التجارة الإلكترونية', url: 'https://getsoft.ye/services#ecommerce' },
+    { '@type': 'ListItem', position: 6, name: 'الاستضافة والصيانة', url: 'https://getsoft.ye/services#hosting' },
   ],
 }
 
@@ -60,7 +60,6 @@ export default async function ServicesPage() {
               top: '50%',
               left: '50%',
               transform: 'translate(-50%, -50%)',
-              // width: '600px',
               height: '600px',
               background: 'radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%)',
               pointerEvents: 'none',

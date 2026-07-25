@@ -44,9 +44,18 @@ export default function Navbar() {
           {/* Logo */}
           <div className="navbar__logo-wrap">
             <Link href="/" className="navbar__logo" aria-label="جيت سوفت - الصفحة الرئيسية">
-              <div className="navbar__logo-icon" aria-hidden="true">
-                <span>G</span>
-              </div>
+              <img
+                src="/logo.png"
+                alt="Get Soft"
+                style={{
+                  height: '42px',
+                  width: '42px',
+                  borderRadius: '10px',
+                  objectFit: 'cover',
+                  boxShadow: '0 4px 12px rgba(201, 168, 76, 0.3)',
+                  border: '1px solid var(--gold-border, rgba(201, 168, 76, 0.4))',
+                }}
+              />
               <span className="navbar__logo-text">Get Soft</span>
             </Link>
 

@@ -1,5 +1,5 @@
 export default async function sitemap() {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://getsoft.sa'
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://getsoft.ye'
 
   const routes = ['', '/services', '/portfolio', '/about', '/contact'].map((route) => ({
     url: `${baseUrl}${route}`,

@@ -2,15 +2,15 @@ import './globals.css'
 import ScrollReveal from '@/components/layout/ScrollReveal'
 
 export const metadata = {
-  metadataBase: new URL('https://getsoft.sa'),
+  metadataBase: new URL('https://getsoft.ye'),
 
   title: {
-    default: 'جيت سوفت | شركة برمجيات وتصميم مواقع الويب في المملكة العربية السعودية',
+    default: 'جيت سوفت | شركة برمجيات وتصميم مواقع الويب في الجمهورية اليمنية',
     template: '%s | جيت سوفت',
   },
 
   description:
-    'جيت سوفت — شركة برمجيات متخصصة في تطوير مواقع الويب، تطبيقات الجوال، الأنظمة المؤسسية وتصميم واجهات المستخدم. خبرة تقنية عالية وتسليم احترافي في الموعد.',
+    'جيت سوفت — شركة برمجيات متخصصة في تطوير مواقع الويب، تطبيقات الجوال، الأنظمة المؤسسية وتصميم واجهات المستخدم في اليمن. خبرة تقنية عالية وتسليم احترافي في الموعد.',
 
   keywords: [
     'شركة برمجيات',
@@ -24,34 +24,35 @@ export const metadata = {
     'برمجة احترافية',
     'تطوير تطبيقات',
     'شركة تقنية',
-    'المملكة العربية السعودية',
-    'الرياض',
+    'الجمهورية اليمنية',
+    'صنعاء',
+    'اليمن',
     'Get Soft',
     'جيت سوفت',
   ],
 
-  authors: [{ name: 'Get Soft', url: 'https://getsoft.sa' }],
+  authors: [{ name: 'Get Soft', url: 'https://getsoft.ye' }],
   creator: 'Get Soft',
   publisher: 'Get Soft',
 
   alternates: {
-    canonical: 'https://getsoft.sa',
-    languages: { 'ar-SA': 'https://getsoft.sa' },
+    canonical: 'https://getsoft.ye',
+    languages: { 'ar-YE': 'https://getsoft.ye' },
   },
 
   openGraph: {
     type: 'website',
-    locale: 'ar_SA',
-    url: 'https://getsoft.sa',
+    locale: 'ar_YE',
+    url: 'https://getsoft.ye',
     siteName: 'جيت سوفت',
-    title: 'جيت سوفت | شركة برمجيات وتصميم مواقع الويب',
+    title: 'جيت سوفت | شركة برمجيات وتصميم مواقع الويب في اليمن',
     description:
       'شركة برمجيات متخصصة في تطوير مواقع الويب، تطبيقات الجوال، الأنظمة المؤسسية وتصميم واجهات المستخدم.',
     images: [
       {
-        url: '/og-image.jpg',
-        width: 1200,
-        height: 630,
+        url: '/logo.png',
+        width: 800,
+        height: 800,
         alt: 'جيت سوفت — شركة برمجيات احترافية',
       },
     ],
@@ -59,12 +60,12 @@ export const metadata = {
 
   twitter: {
     card: 'summary_large_image',
-    site: '@getsoft_sa',
-    creator: '@getsoft_sa',
-    title: 'جيت سوفت | شركة برمجيات وتصميم مواقع الويب',
+    site: '@getsoft_ye',
+    creator: '@getsoft_ye',
+    title: 'جيت سوفت | شركة برمجيات وتصميم مواقع الويب في اليمن',
     description:
       'شركة برمجيات متخصصة في تطوير مواقع الويب، تطبيقات الجوال، والأنظمة المؤسسية.',
-    images: ['/og-image.jpg'],
+    images: ['/logo.png'],
   },
 
   robots: {
@@ -82,10 +83,10 @@ export const metadata = {
   icons: {
     icon: [
       { url: '/favicon.ico' },
-      { url: '/icon-16x16.png', sizes: '16x16', type: 'image/png' },
-      { url: '/icon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/icon.png', sizes: '192x192', type: 'image/png' },
+      { url: '/logo.png', sizes: '512x512', type: 'image/png' },
     ],
-    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
+    apple: [{ url: '/apple-icon.png', sizes: '180x180', type: 'image/png' }],
   },
 
   manifest: '/manifest.json',
@@ -101,34 +102,34 @@ const organizationSchema = {
   '@type': 'Organization',
   name: 'Get Soft',
   alternateName: 'جيت سوفت',
-  url: 'https://getsoft.sa',
-  logo: 'https://getsoft.sa/logo.png',
+  url: 'https://getsoft.ye',
+  logo: 'https://getsoft.ye/logo.png',
   description:
-    'شركة برمجيات متخصصة في تطوير مواقع الويب، تطبيقات الجوال، الأنظمة المؤسسية وتصميم واجهات المستخدم.',
+    'شركة برمجيات متخصصة في تطوير مواقع الويب، تطبيقات الجوال، الأنظمة المؤسسية وتصميم واجهات المستخدم في الجمهورية اليمنية.',
   foundingDate: '2019',
   address: {
     '@type': 'PostalAddress',
-    addressLocality: 'الرياض',
-    addressCountry: 'SA',
+    addressLocality: 'صنعاء',
+    addressCountry: 'YE',
   },
   contactPoint: {
     '@type': 'ContactPoint',
     contactType: 'customer service',
-    telephone: '+966-50-000-0000',
-    email: 'info@getsoft.sa',
+    telephone: '+967-770-000-000',
+    email: 'info@getsoft.ye',
     availableLanguage: ['Arabic'],
   },
   sameAs: [
-    'https://twitter.com/getsoft_sa',
-    'https://instagram.com/getsoft_sa',
+    'https://twitter.com/getsoft_ye',
+    'https://instagram.com/getsoft_ye',
     'https://linkedin.com/company/getsoft',
   ],
   serviceArea: {
     '@type': 'GeoCircle',
     geoMidpoint: {
       '@type': 'GeoCoordinates',
-      latitude: 24.7136,
-      longitude: 46.6753,
+      latitude: 15.3694,
+      longitude: 44.1910,
     },
     geoRadius: '500000',
   },
@@ -147,13 +148,13 @@ const organizationSchema = {
 const websiteSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
-  url: 'https://getsoft.sa',
+  url: 'https://getsoft.ye',
   name: 'جيت سوفت',
-  description: 'شركة برمجيات وتصميم مواقع الويب',
+  description: 'شركة برمجيات وتصميم مواقع الويب في اليمن',
   inLanguage: 'ar',
   potentialAction: {
     '@type': 'SearchAction',
-    target: 'https://getsoft.sa/portfolio?q={search_term_string}',
+    target: 'https://getsoft.ye/portfolio?q={search_term_string}',
     'query-input': 'required name=search_term_string',
   },
 }
@@ -166,6 +167,13 @@ export default function RootLayout({ children }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#080808" />
         <meta name="msapplication-TileColor" content="#080808" />
+
+        {/* Explicit Favicon Links */}
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="192x192" href="/icon.png" />
+        <link rel="icon" type="image/png" sizes="512x512" href="/logo.png" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
         {/* Preconnect for performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
