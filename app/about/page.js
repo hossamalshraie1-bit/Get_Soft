@@ -1,7 +1,5 @@
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
-import TeamSection from '@/components/about/TeamSection'
-import { getTeam } from '@/lib/supabase'
 
 export const metadata = {
   title: 'من نحن | جيت سوفت',
@@ -16,8 +14,6 @@ export const metadata = {
 }
 
 export default async function AboutPage() {
-  const initialTeam = await getTeam()
-
   return (
     <>
       <Navbar />
@@ -89,8 +85,6 @@ export default async function AboutPage() {
           </div>
         </section>
 
-        {/* Team Section */}
-        <TeamSection initialTeam={initialTeam} />
       </main>
       <Footer />
     </>
