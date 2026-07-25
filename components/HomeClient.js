@@ -3,7 +3,6 @@
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import Hero from '@/components/home/Hero'
-import Stats from '@/components/home/Stats'
 import Services from '@/components/home/Services'
 import Portfolio from '@/components/home/Portfolio'
 import WhyUs from '@/components/home/WhyUs'
@@ -16,7 +15,6 @@ export default function HomeClient({ stats, services, projects, testimonials }) 
       <Navbar />
       <main id="main-content">
         <Hero />
-        <Stats stats={stats} />
         <Services services={services} />
         <Portfolio projects={projects} preview={true} />
         <WhyUs />

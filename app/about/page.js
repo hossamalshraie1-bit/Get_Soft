@@ -1,6 +1,5 @@
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
-import CTASection from '@/components/home/CTASection'
 import { getTeam } from '@/lib/supabase'
 
 export const metadata = {
@@ -136,7 +135,6 @@ export default async function AboutPage() {
           </div>
         </section>
 
-        <CTASection />
       </main>
       <Footer />
     </>

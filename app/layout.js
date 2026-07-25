@@ -104,7 +104,7 @@ const organizationSchema = {
   url: 'https://getsoft.sa',
   logo: 'https://getsoft.sa/logo.png',
   description:
-    'شركة برمجيات متخصصة في تطوير مواقع الويب، تطبيقات الجوال، الأنظمة المؤسسية وتصميم واجهات المستخدم في المملكة العربية السعودية.',
+    'شركة برمجيات متخصصة في تطوير مواقع الويب، تطبيقات الجوال، الأنظمة المؤسسية وتصميم واجهات المستخدم.',
   foundingDate: '2019',
   address: {
     '@type': 'PostalAddress',
@@ -149,7 +149,7 @@ const websiteSchema = {
   '@type': 'WebSite',
   url: 'https://getsoft.sa',
   name: 'جيت سوفت',
-  description: 'شركة برمجيات وتصميم مواقع الويب في المملكة العربية السعودية',
+  description: 'شركة برمجيات وتصميم مواقع الويب',
   inLanguage: 'ar',
   potentialAction: {
     '@type': 'SearchAction',

@@ -1,3 +1,6 @@
+'use client'
+
+import { useRef } from 'react'
 import Link from 'next/link'
 
 const DEFAULT_SERVICES = [
@@ -45,7 +48,84 @@ const DEFAULT_SERVICES = [
   },
 ]
 
-export default function Services({ services, showAll = false }) {
+// ── Single Service Card ───────────────────────────────────────────────────────
+function ServiceCard({ service, index }) {
+  return (
+    <article
+      className={`service-card reveal reveal-delay-${(index % 3) + 1}`}
+      itemScope
+      itemType="https://schema.org/Service"
+    >
+      {service.popular && (
+        <div className="badge badge-gold" style={{ position: 'absolute', top: 'var(--space-4)', left: 'var(--space-4)', zIndex: 1 }}>
+          ⭐ الأكثر طلباً
+        </div>
+      )}
+      <span className="service-card__icon" aria-hidden="true">{service.icon}</span>
+      <h3 className="service-card__title" itemProp="name">{service.title}</h3>
+      <p className="service-card__description" itemProp="description">{service.description}</p>
+      <ul className="service-card__features" aria-label={`مميزات ${service.title}`}>
+        {service.features.map((feature, fIndex) => (
+          <li key={fIndex} className="service-card__feature">{feature}</li>
+        ))}
+      </ul>
+      <Link href="/contact" className="btn btn-secondary" style={{ width: '100%', justifyContent: 'center' }}>
+        طلب الخدمة
+      </Link>
+    </article>
+  )
+}
+
+// ── Mobile Swipe Strip ────────────────────────────────────────────────────────
+function ServicesMobileStrip({ services }) {
+  const trackRef = useRef(null)
+  const isDragging = useRef(false)
+  const startX = useRef(0)
+  const scrollLeft = useRef(0)
+
+  const onMouseDown = (e) => {
+    isDragging.current = true
+    startX.current = e.pageX - trackRef.current.offsetLeft
+    scrollLeft.current = trackRef.current.scrollLeft
+    trackRef.current.style.cursor = 'grabbing'
+  }
+  const onMouseUp = () => {
+    isDragging.current = false
+    trackRef.current.style.cursor = 'grab'
+  }
+  const onMouseLeave = () => {
+    isDragging.current = false
+    if (trackRef.current) trackRef.current.style.cursor = 'grab'
+  }
+  const onMouseMove = (e) => {
+    if (!isDragging.current) return
+    e.preventDefault()
+    const x = e.pageX - trackRef.current.offsetLeft
+    const walk = (x - startX.current) * 1.5
+    trackRef.current.scrollLeft = scrollLeft.current - walk
+  }
+
+  return (
+    <div
+      className="services-strip"
+      ref={trackRef}
+      onMouseDown={onMouseDown}
+      onMouseUp={onMouseUp}
+      onMouseLeave={onMouseLeave}
+      onMouseMove={onMouseMove}
+      aria-label="الخدمات — اسحب للتمرير"
+    >
+      {services.map((service, index) => (
+        <div key={index} className="services-strip__item">
+          <ServiceCard service={service} index={index} />
+        </div>
+      ))}
+    </div>
+  )
+}
+
+// ── Main Export ───────────────────────────────────────────────────────────────
+export default function Services({ services, showAll = false, hideHeader = false }) {
   const activeServices = (services && services.length > 0) ? services : DEFAULT_SERVICES
   const displayedServices = showAll ? activeServices : activeServices.slice(0, 6)
 
@@ -53,52 +133,28 @@ export default function Services({ services, showAll = false }) {
     <section className="section" id="services" aria-labelledby="services-heading">
       <div className="container">
         {/* Section Title */}
-        <div className="section-title reveal">
-          <div className="section-title__tag">⚡ خدماتنا</div>
-          <h2 className="section-title__heading" id="services-heading">
-            حلول تقنية <span className="text-gradient">متكاملة</span>
-          </h2>
-          <div className="gold-divider" />
-          <p className="section-title__description">
-            نقدم مجموعة شاملة من الخدمات التقنية لمساعدتك على بناء حضور رقمي قوي ومتميز.
-          </p>
-        </div>
+        {!hideHeader && (
+          <div className="section-title reveal">
+            <div className="section-title__tag">⚡ خدماتنا</div>
+            <h2 className="section-title__heading" id="services-heading">
+              حلول تقنية <span className="text-gradient">متكاملة</span>
+            </h2>
+            <div className="gold-divider" />
+            <p className="section-title__description">
+              نقدم مجموعة شاملة من الخدمات التقنية لمساعدتك على بناء حضور رقمي قوي ومتميز.
+            </p>
+          </div>
+        )}
 
-        {/* Services Grid */}
-        <div className="services-grid">
+        {/* Desktop Grid — always shown on services page, hidden on home mobile */}
+        <div className={`services-grid ${!showAll ? 'services-grid--home' : ''}`}>
           {displayedServices.map((service, index) => (
-            <article
-              key={index}
-              className={`service-card reveal reveal-delay-${(index % 3) + 1}`}
-              itemScope
-              itemType="https://schema.org/Service"
-            >
-              {service.popular && (
-                <div className="badge badge-gold" style={{ position: 'absolute', top: 'var(--space-4)', left: 'var(--space-4)', zIndex: 1 }}>
-                  ⭐ الأكثر طلباً
-                </div>
-              )}
-
-              <span className="service-card__icon" aria-hidden="true">{service.icon}</span>
-
-              <h3 className="service-card__title" itemProp="name">{service.title}</h3>
-
-              <p className="service-card__description" itemProp="description">
-                {service.description}
-              </p>
-
-              <ul className="service-card__features" aria-label={`مميزات ${service.title}`}>
-                {service.features.map((feature, fIndex) => (
-                  <li key={fIndex} className="service-card__feature">{feature}</li>
-                ))}
-              </ul>
-
-              <Link href="/contact" className="btn btn-secondary" style={{ width: '100%', justifyContent: 'center' }}>
-                طلب الخدمة
-              </Link>
-            </article>
+            <ServiceCard key={index} service={service} index={index} />
           ))}
         </div>
+
+        {/* Mobile Swipe Strip — home page only */}
+        {!showAll && <ServicesMobileStrip services={displayedServices} />}
 
         {/* View All Button */}
         {!showAll && (

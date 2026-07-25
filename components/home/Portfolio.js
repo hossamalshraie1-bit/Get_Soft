@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef, useEffect, useCallback } from 'react'
 import Link from 'next/link'
 
 const CATEGORIES = [
@@ -154,7 +154,59 @@ function ProjectCard({ project, index }) {
   )
 }
 
-export default function Portfolio({ projects = [], preview = false }) {
+// ── Mobile Auto-Scrolling Carousel ──────────────────────────────────────────
+function MobileCarousel({ projects }) {
+  const trackRef = useRef(null)
+  const isPaused = useRef(false)
+  const posRef = useRef(0)
+  const rafRef = useRef(null)
+  const SPEED = 0.5 // px per frame
+
+  const tick = useCallback(() => {
+    if (!trackRef.current) return
+    if (!isPaused.current) {
+      posRef.current += SPEED
+      const trackWidth = trackRef.current.scrollWidth / 2
+      if (posRef.current >= trackWidth) posRef.current = 0
+      trackRef.current.style.transform = `translateX(${posRef.current}px)`
+    }
+    rafRef.current = requestAnimationFrame(tick)
+  }, [])
+
+  useEffect(() => {
+    rafRef.current = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(rafRef.current)
+  }, [tick])
+
+  const pause = () => { isPaused.current = true }
+  const resume = () => { isPaused.current = false }
+
+  // Duplicate projects for seamless loop
+  const doubled = [...projects, ...projects]
+
+  return (
+    <div
+      className="mobile-carousel"
+      onMouseDown={pause}
+      onMouseUp={resume}
+      onMouseLeave={resume}
+      onTouchStart={pause}
+      onTouchEnd={resume}
+      aria-label="معرض الأعمال — حرك للجانبين"
+    >
+      <div className="mobile-carousel__track" ref={trackRef}>
+        {doubled.map((project, index) => (
+          <div key={index} className="mobile-carousel__item">
+            <ProjectCard project={project} index={index % projects.length} />
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+// ── Main Component ───────────────────────────────────────────────────────────
+export default function Portfolio({ projects = [], preview = false, hideHeader = false }) {
   const [activeFilter, setActiveFilter] = useState('all')
   const displayProjects = projects.length > 0 ? projects : DEMO_PROJECTS
   const limit = preview ? 6 : displayProjects.length
@@ -167,18 +219,20 @@ export default function Portfolio({ projects = [], preview = false }) {
     <section className="section" id="portfolio" aria-labelledby="portfolio-heading">
       <div className="container">
         {/* Section Title */}
-        <div className="section-title reveal">
-          <div className="section-title__tag">🎨 أعمالنا</div>
-          <h2 className="section-title__heading" id="portfolio-heading">
-            مشاريع <span className="text-gradient">نفخر</span> بها
-          </h2>
-          <div className="gold-divider" />
-          <p className="section-title__description">
-            نماذج من أفضل المشاريع التي أنجزناها لعملائنا في مختلف القطاعات.
-          </p>
-        </div>
+        {!hideHeader && (
+          <div className="section-title reveal">
+            <div className="section-title__tag">🎨 أعمالنا</div>
+            <h2 className="section-title__heading" id="portfolio-heading">
+              مشاريع <span className="text-gradient">نفخر</span> بها
+            </h2>
+            <div className="gold-divider" />
+            <p className="section-title__description">
+              نماذج من أفضل المشاريع التي أنجزناها لعملائنا في مختلف القطاعات.
+            </p>
+          </div>
+        )}
 
-        {/* Filter */}
+        {/* Filter — desktop only, or full portfolio page */}
         {!preview && (
           <div className="portfolio-filter" role="tablist" aria-label="فلتر المشاريع">
             {CATEGORIES.map((cat) => (
@@ -196,12 +250,15 @@ export default function Portfolio({ projects = [], preview = false }) {
           </div>
         )}
 
-        {/* Grid */}
-        <div className="portfolio-grid">
+        {/* Desktop Grid — always on portfolio page, hidden on home mobile */}
+        <div className={`portfolio-grid ${preview ? 'portfolio-grid--desktop' : ''}`}>
           {filtered.map((project, index) => (
             <ProjectCard key={project.id || index} project={project} index={index} />
           ))}
         </div>
+
+        {/* Mobile Auto-Scrolling Carousel — home page only */}
+        {preview && <MobileCarousel projects={displayProjects.slice(0, limit)} />}
 
         {/* View All */}
         {preview && (

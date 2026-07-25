@@ -1,7 +1,6 @@
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import Services from '@/components/home/Services'
-import CTASection from '@/components/home/CTASection'
 import { getServices } from '@/lib/supabase'
 
 export const metadata = {
@@ -44,8 +43,8 @@ export default async function ServicesPage() {
         {/* Page Hero */}
         <section
           style={{
-            paddingTop: '140px',
-            paddingBottom: 'var(--space-16)',
+            paddingTop: '80px',
+            paddingBottom: '20px',
             textAlign: 'center',
             background: 'var(--bg-secondary)',
             borderBottom: '1px solid var(--border-card)',
@@ -61,7 +60,7 @@ export default async function ServicesPage() {
               top: '50%',
               left: '50%',
               transform: 'translate(-50%, -50%)',
-              width: '600px',
+              // width: '600px',
               height: '600px',
               background: 'radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%)',
               pointerEvents: 'none',
@@ -75,14 +74,13 @@ export default async function ServicesPage() {
               حلول تقنية <span className="text-gradient">متكاملة</span>
             </h1>
             <div className="gold-divider" />
-            <p style={{ fontSize: 'var(--font-size-lg)', color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto', lineHeight: 1.7 }}>
+            <p style={{ fontSize: 'var(--font-size-lg)', color: 'var(--text-secondary)', margin: '0 auto', lineHeight: 1.7 }}>
               من الفكرة إلى التنفيذ — نقدم خدمات برمجية شاملة لمساعدتك على بناء حضور رقمي قوي.
             </p>
           </div>
         </section>
 
-        <Services services={services} showAll={true} />
-        <CTASection />
+        <Services services={services} showAll={true} hideHeader={true} />
       </main>
       <Footer />
     </>

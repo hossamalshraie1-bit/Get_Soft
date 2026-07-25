@@ -45,8 +45,8 @@ export default function WhyUs() {
             </div>
             <h2 id="whyus-heading" style={{ fontSize: 'clamp(2rem, 4vw, 2.8rem)', fontWeight: 900, marginBottom: 'var(--space-6)', lineHeight: 1.2 }}>
               نبني شراكة
-              <br />
-              <span className="text-gradient">ناجحة معك</span>
+              {/* <br /> */}
+              <span className="text-gradient"> ناجحة معك</span>
             </h2>
             <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-lg)', lineHeight: 1.8, marginBottom: 'var(--space-8)' }}>
               نحن لسنا مجرد شركة برمجيات — نحن شريكك التقني الذي يفهم أهدافك ويعمل معك خطوة بخطوة لتحقيقها.

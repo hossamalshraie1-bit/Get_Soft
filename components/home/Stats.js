@@ -46,12 +46,13 @@ const DEFAULT_STATS = [
   { icon: '💻', value: '+20', label: 'تقنية متقنة' },
 ]
 
-export default function Stats({ stats = DEFAULT_STATS }) {
+export default function Stats({ stats }) {
+  const activeStats = (stats && stats.length > 0) ? stats : DEFAULT_STATS
   return (
     <section className="stats-bar" aria-label="إحصائيات الشركة">
       <div className="container">
         <div className="stats-bar__grid">
-          {stats.map((stat, index) => (
+          {activeStats.map((stat, index) => (
             <div key={index} className="stat-item reveal" style={{ transitionDelay: `${index * 0.1}s` }}>
               <span className="stat-item__icon" aria-hidden="true">{stat.icon}</span>
               <div className="stat-item__value" aria-label={`${stat.value} ${stat.label}`}>

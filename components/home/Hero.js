@@ -54,10 +54,10 @@ export default function Hero() {
       <div className="container hero__container">
         {/* ===== Content Side ===== */}
         <div className="hero__content">
-          <div className="hero__tag" aria-label="وسم تعريفي">
+          {/* <div className="hero__tag" aria-label="وسم تعريفي">
             <span className="hero__tag-dot" aria-hidden="true" />
             🚀 شركة برمجيات احترافية في السعودية
-          </div>
+          </div> */}
 
           <h1 className="hero__title">
             نبني{' '}

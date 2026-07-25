@@ -35,7 +35,8 @@ function StarRating({ rating }) {
   )
 }
 
-export default function Testimonials({ testimonials = DEFAULT_TESTIMONIALS }) {
+export default function Testimonials({ testimonials }) {
+  const activeTestimonials = (testimonials && testimonials.length > 0) ? testimonials : DEFAULT_TESTIMONIALS
   return (
     <section
       className="section"
@@ -58,7 +59,7 @@ export default function Testimonials({ testimonials = DEFAULT_TESTIMONIALS }) {
 
         {/* Testimonials Grid */}
         <div className="testimonials-grid">
-          {testimonials.map((testimonial, index) => (
+          {activeTestimonials.map((testimonial, index) => (
             <div
               key={testimonial.id || index}
               className={`testimonial-card reveal reveal-delay-${index + 1}`}

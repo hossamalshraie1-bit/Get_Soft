@@ -1,7 +1,6 @@
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import Portfolio from '@/components/home/Portfolio'
-import CTASection from '@/components/home/CTASection'
 import { getProjects } from '@/lib/supabase'
 
 export const metadata = {
@@ -57,14 +56,13 @@ export default async function PortfolioPage() {
               مشاريع <span className="text-gradient">نفخر</span> بها
             </h1>
             <div className="gold-divider" />
-            <p style={{ fontSize: 'var(--font-size-lg)', color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto', lineHeight: 1.7 }}>
+            <p style={{ fontSize: 'var(--font-size-lg)', color: 'var(--text-secondary)', margin: '0 auto', lineHeight: 1.7 }}>
               أكثر من 150 مشروع ناجح في مختلف القطاعات — كل مشروع قصة نجاح مع عميل راضٍ.
             </p>
           </div>
         </section>
 
-        <Portfolio projects={projects} preview={false} />
-        <CTASection />
+        <Portfolio projects={projects} preview={false} hideHeader={true} />
       </main>
       <Footer />
     </>
