@@ -92,7 +92,7 @@ export const metadata = {
   manifest: '/manifest.json',
 
   verification: {
-    google: 'your-google-search-console-verification-code',
+    google: 'google7464326adc760ed7',
   },
 }
 
