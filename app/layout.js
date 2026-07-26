@@ -128,7 +128,7 @@ const organizationSchema = {
     availableLanguage: ['Arabic'],
   },
   sameAs: [
-    'https://twitter.com/getsoft_ye',
+    'https://twitter.com/getsoft2025',
     'https://instagram.com/getsoft2025',
     'https://linkedin.com/company/getsoft',
   ],

@@ -177,12 +177,7 @@ const DEFAULT_TESTIMONIALS = [
   },
 ]
 
-// const DEFAULT_TEAM = [
-//   { id: 'tm1', name: 'محمد الغامدي', role: 'المدير التقني', bio: 'خبرة أكثر من 8 سنوات في تطوير البرمجيات والأنظمة المؤسسية.', avatar_url: '' },
-//   { id: 'tm2', name: 'ليلى الشمري', role: 'مصممة UI/UX', bio: 'مصممة إبداعية بخبرة 6 سنوات في تصميم واجهات المستخدم.', avatar_url: '' },
-//   { id: 'tm3', name: 'عمر السعد', role: 'مطور موبايل', bio: 'مطور تطبيقات موبايل محترف بخبرة 5 سنوات في React Native وFlutter.', avatar_url: '' },
-//   { id: 'tm4', name: 'نورة الحربي', role: 'مديرة المشاريع', bio: 'خبرة في إدارة المشاريع التقنية وتوجيه فرق العمل.', avatar_url: '' },
-// ]
+const DEFAULT_TEAM = []
 
 const DEFAULT_SETTINGS = {
   hero_title: 'نبني المستقبل الرقمي لشركتك',

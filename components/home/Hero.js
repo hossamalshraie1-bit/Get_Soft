@@ -138,7 +138,7 @@ export default function Hero() {
             </div>
             <div className="hero__code-body">
               <span className="hero__code-line"><span className="c-keyword">import</span> <span className="c-function">React</span> <span className="c-keyword">from</span> <span className="c-string">'react'</span></span>
-              <span className="hero__code-line"><span className="c-comment">// ✨ Get Soft — نبني المستقبل الرقمي</span></span>
+              <span className="hero__code-line"><span className="c-comment">{'// ✨ Get Soft — نبني المستقبل الرقمي'}</span></span>
               <span className="hero__code-line"> </span>
               <span className="hero__code-line"><span className="c-keyword">const</span> <span className="c-function">GetSoft</span> = () =&gt; {'{'}</span>
               <span className="hero__code-line">  <span className="c-keyword">const</span> services = [</span>

@@ -140,7 +140,7 @@ export default function Testimonials({ testimonials = [] }) {
               itemScope
               itemType="https://schema.org/Review"
             >
-              <div className="testimonial-card__quote" aria-hidden="true">"</div>
+              <div className="testimonial-card__quote" aria-hidden="true">&quot;</div>
 
               <meta itemProp="reviewRating" content={testimonial.rating} />
               <p className="testimonial-card__content" itemProp="reviewBody">
