@@ -5,12 +5,12 @@ export const metadata = {
   metadataBase: new URL('https://getsoft.vercel.app'),
 
   title: {
-    default: 'جيت سوفت | شركة برمجيات وتصميم مواقع الويب في الجمهورية اليمنية',
-    template: '%s | جيت سوفت',
+    default: 'Get Soft | للبرمجيات-تصميم مواقع الويب-تطبيقات الموبايل-انظمة ذكية',
+    template: '%s | Get Soft',
   },
 
   description:
-    'جيت سوفت — شركة برمجيات متخصصة في تطوير مواقع الويب، تطبيقات الجوال، الأنظمة المؤسسية وتصميم واجهات المستخدم في اليمن. خبرة تقنية عالية وتسليم احترافي في الموعد.',
+    'Get Soft — شركة برمجيات متخصصة في تطوير مواقع الويب، تطبيقات الجوال، الأنظمة المؤسسية وتصميم واجهات المستخدم.',
 
   keywords: [
     'شركة برمجيات',
@@ -25,10 +25,18 @@ export const metadata = {
     'تطوير تطبيقات',
     'شركة تقنية',
     'الجمهورية اليمنية',
+    'المملكة العربية السعودية',
+    'الامارات العربية المتحدة',
+    'قطر',
+    'الكويت',
+    'البحرين',
+    'عمان',
     'صنعاء',
     'اليمن',
     'Get Soft',
     'جيت سوفت',
+    'getsoft',
+    'get soft',
   ],
 
   authors: [{ name: 'Get Soft', url: 'https://getsoft.vercel.app' }],
@@ -44,8 +52,8 @@ export const metadata = {
     type: 'website',
     locale: 'ar_YE',
     url: 'https://getsoft.vercel.app',
-    siteName: 'جيت سوفت',
-    title: 'جيت سوفت | شركة برمجيات وتصميم مواقع الويب في اليمن',
+    siteName: 'Get Soft',
+    title: 'Get Soft | شركة برمجيات وتصميم مواقع الويب',
     description:
       'شركة برمجيات متخصصة في تطوير مواقع الويب، تطبيقات الجوال، الأنظمة المؤسسية وتصميم واجهات المستخدم.',
     images: [
@@ -53,7 +61,7 @@ export const metadata = {
         url: '/logo.png',
         width: 800,
         height: 800,
-        alt: 'جيت سوفت — شركة برمجيات احترافية',
+        alt: 'Get Soft — شركة برمجيات احترافية',
       },
     ],
   },
@@ -62,7 +70,7 @@ export const metadata = {
     card: 'summary_large_image',
     site: '@getsoft_ye',
     creator: '@getsoft_ye',
-    title: 'جيت سوفت | شركة برمجيات وتصميم مواقع الويب في اليمن',
+    title: 'Get Soft | شركة برمجيات وتصميم مواقع الويب',
     description:
       'شركة برمجيات متخصصة في تطوير مواقع الويب، تطبيقات الجوال، والأنظمة المؤسسية.',
     images: ['/logo.png'],
@@ -105,7 +113,7 @@ const organizationSchema = {
   url: 'https://getsoft.vercel.app',
   logo: 'https://getsoft.vercel.app/logo.png',
   description:
-    'شركة برمجيات متخصصة في تطوير مواقع الويب، تطبيقات الجوال، الأنظمة المؤسسية وتصميم واجهات المستخدم في الجمهورية اليمنية.',
+    'شركة برمجيات متخصصة في تطوير مواقع الويب، تطبيقات الجوال، الأنظمة المؤسسية وتصميم واجهات المستخدم.',
   foundingDate: '2019',
   address: {
     '@type': 'PostalAddress',
@@ -150,7 +158,7 @@ const websiteSchema = {
   '@type': 'WebSite',
   url: 'https://getsoft.vercel.app',
   name: 'جيت سوفت',
-  description: 'شركة برمجيات وتصميم مواقع الويب في اليمن',
+  description: 'شركة برمجيات وتصميم مواقع الويب',
   inLanguage: 'ar',
   potentialAction: {
     '@type': 'SearchAction',

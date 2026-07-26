@@ -57,8 +57,8 @@ export default function Testimonials({ testimonials = [] }) {
   const activeTestimonials = (loadedTestimonials && loadedTestimonials.length > 0)
     ? loadedTestimonials
     : (testimonials && testimonials.length > 0)
-    ? testimonials
-    : DEFAULT_TESTIMONIALS
+      ? testimonials
+      : DEFAULT_TESTIMONIALS
 
   const [activeIndex, setActiveIndex] = useState(0)
   const gridRef = useRef(null)

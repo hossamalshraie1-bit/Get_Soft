@@ -69,7 +69,7 @@ export default function CTASection() {
               ابدأ مشروعك الآن 🚀
             </Link>
             <a
-              href="https://wa.me/967770000000"
+              href="https://wa.me/967776158797"
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-secondary btn--lg"
@@ -77,7 +77,7 @@ export default function CTASection() {
             >
               💬 واتساب
             </a>
-            <a href="tel:+967770000000" className="btn btn-secondary btn--lg" id="cta-call-btn">
+            <a href="tel:+967776158797" className="btn btn-secondary btn--lg" id="cta-call-btn">
               📞 اتصل بنا
             </a>
           </div>

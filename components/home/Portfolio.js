@@ -200,7 +200,7 @@ function ProjectCard({ project, index, onSelect }) {
         <h3 className="project-card__title" itemProp="name">
           {project.title}
         </h3>
-        
+
         {project.client && (
           <p style={{ fontSize: 'var(--font-size-sm)', color: 'var(--text-muted)', marginBottom: 'var(--space-2)' }}>
             العميل: <span style={{ color: 'var(--gold-primary)' }}>{project.client}</span>
@@ -297,7 +297,7 @@ function ProjectModal({ project, onClose }) {
   const whatsappMessage = encodeURIComponent(
     `السلام عليكم ورحمة الله، أود الاستفسار وطلب مشروع مماثل لـ: ${project.title}`
   )
-  const whatsappUrl = `https://wa.me/966500000000?text=${whatsappMessage}`
+  const whatsappUrl = `https://wa.me/967776158797?text=${whatsappMessage}`
 
   const handleNextImage = () => {
     setCurrentImgIndex((prev) => (prev + 1) % allImages.length)

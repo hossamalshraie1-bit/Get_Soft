@@ -4,14 +4,14 @@ import Portfolio from '@/components/home/Portfolio'
 import { getProjects } from '@/lib/supabase'
 
 export const metadata = {
-  title: 'أعمالنا | جيت سوفت',
+  title: 'أعمالنا | Get Soft',
   description:
-    'اكتشف مشاريعنا الناجحة في تطوير مواقع الويب، تطبيقات الجوال، والأنظمة المؤسسية. أكثر من 150 مشروع منجز لعملاء في اليمن والوطن العربي.',
-  alternates: { canonical: 'https://getsoft.ye/portfolio' },
+    'اكتشف مشاريعنا الناجحة في تطوير مواقع الويب، تطبيقات الجوال، والأنظمة المؤسسية. أكثر من 150 مشروع منجز لعملاء في الوطن العربي.',
+  alternates: { canonical: 'https://getsoft.vercel.app/portfolio' },
   openGraph: {
-    title: 'أعمالنا | جيت سوفت',
-    description: 'معرض مشاريع جيت سوفت في البرمجة وتصميم المواقع.',
-    url: 'https://getsoft.ye/portfolio',
+    title: 'أعمالنا | Get Soft',
+    description: 'معرض مشاريع Get Soft في البرمجة وتصميم المواقع.',
+    url: 'https://getsoft.vercel.app/portfolio',
   },
 }
 

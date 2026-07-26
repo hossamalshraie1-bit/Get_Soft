@@ -4,28 +4,28 @@ import Services from '@/components/home/Services'
 import { getServices } from '@/lib/supabase'
 
 export const metadata = {
-  title: 'خدماتنا | جيت سوفت',
+  title: 'خدماتنا | Get Soft',
   description:
     'اكتشف مجموعة خدماتنا التقنية الشاملة: تطوير مواقع الويب، تطبيقات الجوال، الأنظمة المؤسسية، تصميم UI/UX، التجارة الإلكترونية والاستضافة.',
-  alternates: { canonical: 'https://getsoft.ye/services' },
+  alternates: { canonical: 'https://getsoft.vercel.app/services' },
   openGraph: {
-    title: 'خدماتنا | جيت سوفت',
+    title: 'خدماتنا | Get Soft',
     description: 'خدمات برمجية متكاملة للشركات والمؤسسات في الجمهورية اليمنية.',
-    url: 'https://getsoft.ye/services',
+    url: 'https://getsoft.vercel.app/services',
   },
 }
 
 const serviceSchema = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
-  name: 'خدمات جيت سوفت',
+  name: 'خدمات Get Soft',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'تطوير مواقع الويب', url: 'https://getsoft.ye/services#web' },
-    { '@type': 'ListItem', position: 2, name: 'تطبيقات الجوال', url: 'https://getsoft.ye/services#mobile' },
-    { '@type': 'ListItem', position: 3, name: 'الأنظمة المؤسسية', url: 'https://getsoft.ye/services#systems' },
-    { '@type': 'ListItem', position: 4, name: 'تصميم UI/UX', url: 'https://getsoft.ye/services#uiux' },
-    { '@type': 'ListItem', position: 5, name: 'التجارة الإلكترونية', url: 'https://getsoft.ye/services#ecommerce' },
-    { '@type': 'ListItem', position: 6, name: 'الاستضافة والصيانة', url: 'https://getsoft.ye/services#hosting' },
+    { '@type': 'ListItem', position: 1, name: 'تطوير مواقع الويب', url: 'https://getsoft.vercel.app/services#web' },
+    { '@type': 'ListItem', position: 2, name: 'تطبيقات الجوال', url: 'https://getsoft.vercel.app/services#mobile' },
+    { '@type': 'ListItem', position: 3, name: 'الأنظمة المؤسسية', url: 'https://getsoft.vercel.app/services#systems' },
+    { '@type': 'ListItem', position: 4, name: 'تصميم UI/UX', url: 'https://getsoft.vercel.app/services#uiux' },
+    { '@type': 'ListItem', position: 5, name: 'التجارة الإلكترونية', url: 'https://getsoft.vercel.app/services#ecommerce' },
+    { '@type': 'ListItem', position: 6, name: 'الاستضافة والصيانة', url: 'https://getsoft.vercel.app/services#hosting' },
   ],
 }
 

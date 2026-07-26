@@ -54,7 +54,7 @@ export default function Footer() {
                 𝕏
               </a>
               <a
-                href="https://instagram.com/getsoft"
+                href="https://instagram.com/getsoft2025"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="footer__social-link"

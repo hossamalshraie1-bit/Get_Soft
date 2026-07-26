@@ -60,8 +60,8 @@ function ServiceCard({ service, index, isWheelCard = false }) {
   const featureList = Array.isArray(service.features)
     ? service.features
     : typeof service.features === 'string' && service.features.length > 0
-    ? service.features.split(',').map((f) => f.trim())
-    : []
+      ? service.features.split(',').map((f) => f.trim())
+      : []
 
   return (
     <article
@@ -291,8 +291,8 @@ export default function Services({ services = [], showAll = false, hideHeader = 
     loadedServices && loadedServices.length > 0
       ? loadedServices
       : services && services.length > 0
-      ? services
-      : DEFAULT_SERVICES
+        ? services
+        : DEFAULT_SERVICES
 
   const displayedServices = activeServices
 

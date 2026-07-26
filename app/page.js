@@ -2,10 +2,10 @@ import HomeClient from '@/components/HomeClient'
 import { getStats, getServices, getProjects, getTestimonials } from '@/lib/supabase'
 
 export const metadata = {
-  title: 'جيت سوفت | شركة برمجيات وتصميم مواقع الويب في الجمهورية اليمنية',
+  title: 'Get Soft | للبرمجيات-تصميم مواقع الويب-تطبيقات الموبايل-انظمة ذكية',
   description:
-    'جيت سوفت — شركة برمجيات متخصصة في تطوير مواقع الويب، تطبيقات الجوال، الأنظمة المؤسسية وتصميم UI/UX. خبرة +5 سنوات، +150 مشروع ناجح في الجمهورية اليمنية.',
-  alternates: { canonical: 'https://getsoft.ye' },
+    'Get Soft — شركة برمجيات متخصصة في تطوير مواقع الويب، تطبيقات الجوال، الأنظمة المؤسسية وتصميم UI/UX.',
+  alternates: { canonical: 'https://getsoft.vercel.app' },
 }
 
 export default async function HomePage() {
