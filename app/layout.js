@@ -90,17 +90,17 @@ export const metadata = {
 
   icons: {
     icon: [
-      { url: '/favicon.ico?v=2', sizes: 'any' },
-      { url: '/favicon-16x16.png?v=2', sizes: '16x16', type: 'image/png' },
-      { url: '/favicon-32x32.png?v=2', sizes: '32x32', type: 'image/png' },
-      { url: '/android-chrome-192x192.png?v=2', sizes: '192x192', type: 'image/png' },
-      { url: '/android-chrome-512x512.png?v=2', sizes: '512x512', type: 'image/png' },
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/android-chrome-192x192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/android-chrome-512x512.png', sizes: '512x512', type: 'image/png' },
     ],
     apple: [
-      { url: '/apple-touch-icon.png?v=2', sizes: '180x180', type: 'image/png' },
-      { url: '/apple-touch-icon-precomposed.png?v=2', sizes: '180x180', type: 'image/png' },
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+      { url: '/apple-touch-icon-precomposed.png', sizes: '180x180', type: 'image/png' },
     ],
-    shortcut: ['/favicon.ico?v=2'],
+    shortcut: ['/favicon.ico'],
   },
 
   manifest: '/manifest.json',
@@ -136,7 +136,7 @@ const organizationSchema = {
   sameAs: [
     'https://twitter.com/getsoft2025',
     'https://instagram.com/getsoft2025',
-    'https://linkedin.com/company/getsoft2025',
+    'https://linkedin.com/company/getsoft',
   ],
   serviceArea: {
     '@type': 'GeoCircle',
@@ -146,13 +146,6 @@ const organizationSchema = {
       longitude: 44.1910,
     },
     geoRadius: '500000',
-  },
-  aggregateRating: {
-    '@type': 'AggregateRating',
-    ratingValue: '5.0',
-    reviewCount: '150',
-    bestRating: '5',
-    worstRating: '1',
   },
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
@@ -189,16 +182,16 @@ export default function RootLayout({ children }) {
         <meta name="theme-color" content="#080808" />
         <meta name="msapplication-TileColor" content="#080808" />
 
-        {/* Explicit Mobile & Desktop Favicon Links — v2 cache-bust */}
-        <link rel="shortcut icon" href="/favicon.ico?v=2" type="image/x-icon" />
-        <link rel="icon" href="/favicon.ico?v=2" sizes="any" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=2" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=2" />
-        <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png?v=2" />
-        <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png?v=2" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2" />
-        <link rel="apple-touch-icon-precomposed" sizes="180x180" href="/apple-touch-icon-precomposed.png?v=2" />
-        <link rel="manifest" href="/manifest.json?v=2" />
+        {/* Explicit Mobile & Desktop Favicon Links */}
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png" />
+        <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="180x180" href="/apple-touch-icon-precomposed.png" />
+        <link rel="manifest" href="/manifest.json" />
 
         {/* Preconnect for performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
