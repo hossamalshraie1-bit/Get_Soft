@@ -142,7 +142,18 @@ export default function Testimonials({ testimonials = [] }) {
             >
               <div className="testimonial-card__quote" aria-hidden="true">&quot;</div>
 
-              <meta itemProp="reviewRating" content={testimonial.rating} />
+              {/* Schema.org itemReviewed */}
+              <div itemProp="itemReviewed" itemScope itemType="https://schema.org/Organization">
+                <meta itemProp="name" content="جيت سوفت" />
+                <meta itemProp="url" content="https://getsoft.vercel.app" />
+              </div>
+
+              {/* Schema.org reviewRating with ratingValue */}
+              <div itemProp="reviewRating" itemScope itemType="https://schema.org/Rating">
+                <meta itemProp="ratingValue" content={String(testimonial.rating || 5)} />
+                <meta itemProp="bestRating" content="5" />
+                <meta itemProp="worstRating" content="1" />
+              </div>
               <p className="testimonial-card__content" itemProp="reviewBody">
                 {testimonial.content}
               </p>

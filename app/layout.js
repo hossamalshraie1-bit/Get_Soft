@@ -136,7 +136,7 @@ const organizationSchema = {
   sameAs: [
     'https://twitter.com/getsoft2025',
     'https://instagram.com/getsoft2025',
-    'https://linkedin.com/company/getsoft',
+    'https://linkedin.com/company/getsoft2025',
   ],
   serviceArea: {
     '@type': 'GeoCircle',
@@ -146,6 +146,13 @@ const organizationSchema = {
       longitude: 44.1910,
     },
     geoRadius: '500000',
+  },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '5.0',
+    reviewCount: '150',
+    bestRating: '5',
+    worstRating: '1',
   },
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
