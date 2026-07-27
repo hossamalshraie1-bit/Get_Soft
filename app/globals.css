@@ -2842,10 +2842,10 @@ textarea.form-control {
   }
 
   .project-modal-image-wrapper {
-    height: auto !important;
-    min-height: 180px !important;
-    max-height: 52vh !important;
-    padding: 6px 44px 10px 44px !important; /* Reduced top gap to 6px so image sits right under upper border */
+    height: 24vh !important;
+    min-height: 160px !important;
+    max-height: 230px !important;
+    padding: 6px 44px !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -2853,9 +2853,9 @@ textarea.form-control {
   }
 
   .project-modal-image {
-    max-height: 48vh !important;
-    max-width: 100% !important;
-    width: 100% !important;
+    max-height: 100% !important;
+    max-width: 82% !important;
+    width: auto !important;
     height: auto !important;
     object-fit: contain !important;
     border-radius: 8px !important;

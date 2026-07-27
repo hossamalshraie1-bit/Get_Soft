@@ -14,6 +14,12 @@ import {
   createProject,
   updateProject,
   deleteProject,
+  createService,
+  updateService,
+  deleteService,
+  createTestimonial,
+  updateTestimonial,
+  deleteTestimonial,
 } from '@/lib/supabase'
 
 const DEFAULT_SETTINGS = {
