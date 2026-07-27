@@ -2,7 +2,6 @@
 
 import { useState, useRef, useEffect, useCallback } from 'react'
 import Link from 'next/link'
-import { getProjects } from '@/lib/supabase'
 
 const CATEGORIES = [
   { key: 'all', label: 'الكل' },
@@ -21,99 +20,7 @@ const CATEGORY_LABELS = {
   other: 'أخرى',
 }
 
-// 10 Default Demo Projects
-const DEMO_PROJECTS = [
-  {
-    id: 'p1',
-    title: 'منصة التجارة الإلكترونية الذكية',
-    category: 'ecommerce',
-    image_url: null,
-    tech_stack: ['Next.js', 'Supabase', 'Stripe'],
-    client: 'متجر الأناقة',
-    year: 2024,
-  },
-  {
-    id: 'p2',
-    title: 'تطبيق إدارة المطاعم',
-    category: 'mobile',
-    image_url: null,
-    tech_stack: ['React Native', 'Node.js', 'MongoDB'],
-    client: 'سلسلة مطاعم النخبة',
-    year: 2024,
-  },
-  {
-    id: 'p3',
-    title: 'نظام ERP للشركات',
-    category: 'system',
-    image_url: null,
-    tech_stack: ['React', 'PostgreSQL', 'Python'],
-    client: 'شركة الريادة التجارية',
-    year: 2023,
-  },
-  {
-    id: 'p4',
-    title: 'موقع وكالة سفر احترافي',
-    category: 'web',
-    image_url: null,
-    tech_stack: ['Next.js', 'Tailwind', 'Supabase'],
-    client: 'وكالة الأفق للسفر',
-    year: 2024,
-  },
-  {
-    id: 'p5',
-    title: 'تطبيق التوصيل السريع',
-    category: 'mobile',
-    image_url: null,
-    tech_stack: ['Flutter', 'Firebase', 'Google Maps'],
-    client: 'فليت اكسبرس',
-    year: 2023,
-  },
-  {
-    id: 'p6',
-    title: 'موقع عيادة طبية متكامل',
-    category: 'web',
-    image_url: null,
-    tech_stack: ['Next.js', 'Supabase', 'Stripe'],
-    client: 'عيادة الرعاية الصحية',
-    year: 2024,
-  },
-  {
-    id: 'p7',
-    title: 'لوحة تحكم إدارية شاملة',
-    category: 'system',
-    image_url: null,
-    tech_stack: ['React', 'Tailwind', 'Express'],
-    client: 'مجموعة الأفق التقنية',
-    year: 2024,
-  },
-  {
-    id: 'p8',
-    title: 'متجر المنتجات العضوية',
-    category: 'ecommerce',
-    image_url: null,
-    tech_stack: ['Next.js', 'Shopify API'],
-    client: 'جرين لايف',
-    year: 2024,
-  },
-  {
-    id: 'p9',
-    title: 'تطبيق اللياقة والصحة',
-    category: 'mobile',
-    image_url: null,
-    tech_stack: ['React Native', 'GraphQL'],
-    client: 'فتنس كلوپ',
-    year: 2023,
-  },
-  {
-    id: 'p10',
-    title: 'منصة التعلم عن بُعد',
-    category: 'web',
-    image_url: null,
-    tech_stack: ['Next.js', 'PostgreSQL', 'AWS'],
-    client: 'أكاديمية المستقبل',
-    year: 2024,
-  },
-]
+
 
 // Project color themes for placeholder cards
 const CARD_THEMES = [
@@ -270,19 +177,33 @@ function ProjectModal({ project, onClose }) {
   if (!project) return null
 
   // Extract all images
+  // Robust extraction of all project images
   let allImages = []
-  if (project.image_url) allImages.push(project.image_url)
+  const addImage = (url) => {
+    if (!url) return
+    let clean = String(url).trim()
+    clean = clean.replace(/^[\[\]"'`\s]+|[\[\]"'`\s]+$/g, '')
+    if (clean && (clean.startsWith('http') || clean.startsWith('/') || clean.startsWith('data:')) && !allImages.includes(clean)) {
+      allImages.push(clean)
+    }
+  }
+
+  if (project.image_url) addImage(project.image_url)
 
   if (project.images) {
-    if (Array.isArray(project.images)) {
-      project.images.forEach((img) => {
-        if (img && !allImages.includes(img)) allImages.push(img)
-      })
-    } else if (typeof project.images === 'string') {
-      project.images.split(',').forEach((img) => {
-        const trimmed = img.trim()
-        if (trimmed && !allImages.includes(trimmed)) allImages.push(trimmed)
-      })
+    let rawImages = project.images
+    if (typeof rawImages === 'string') {
+      try {
+        if (rawImages.trim().startsWith('[')) {
+          rawImages = JSON.parse(rawImages)
+        }
+      } catch (e) {}
+    }
+
+    if (Array.isArray(rawImages)) {
+      rawImages.forEach(addImage)
+    } else if (typeof rawImages === 'string') {
+      rawImages.split(',').forEach(addImage)
     }
   }
 
@@ -367,13 +288,16 @@ function ProjectModal({ project, onClose }) {
         </button>
 
         {/* Image Slider / Gallery */}
-        <div style={{ position: 'relative', width: '100%', background: '#000', borderRadius: '20px 20px 0 0', overflow: 'hidden' }}>
+        <div className="project-modal-gallery">
           {allImages.length > 0 ? (
-            <div style={{ position: 'relative', aspectRatio: '16/9', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div className="project-modal-image-wrapper">
               <img
                 src={allImages[currentImgIndex]}
                 alt={`${project.title} - صورة ${currentImgIndex + 1}`}
-                style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                className="project-modal-image"
+                onClick={() => window.open(allImages[currentImgIndex], '_blank')}
+                title="انقر لعرض الصورة بحجمها الكامل والتكبير في المتصفح"
+                style={{ cursor: 'zoom-in' }}
               />
 
               {allImages.length > 1 && (
@@ -381,23 +305,9 @@ function ProjectModal({ project, onClose }) {
                   {/* Prev Arrow */}
                   <button
                     onClick={handlePrevImage}
-                    style={{
-                      position: 'absolute',
-                      right: '12px',
-                      top: '50%',
-                      transform: 'translateY(-50%)',
-                      background: 'rgba(0,0,0,0.7)',
-                      color: 'var(--gold-primary)',
-                      border: '1px solid var(--gold-border)',
-                      borderRadius: '50%',
-                      width: '42px',
-                      height: '42px',
-                      cursor: 'pointer',
-                      fontSize: '1.2rem',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}
+                    className="project-modal-arrow project-modal-arrow--prev"
+                    aria-label="الصورة السابقة"
+                    title="الصورة السابقة"
                   >
                     ➔
                   </button>
@@ -405,42 +315,15 @@ function ProjectModal({ project, onClose }) {
                   {/* Next Arrow */}
                   <button
                     onClick={handleNextImage}
-                    style={{
-                      position: 'absolute',
-                      left: '12px',
-                      top: '50%',
-                      transform: 'translateY(-50%)',
-                      background: 'rgba(0,0,0,0.7)',
-                      color: 'var(--gold-primary)',
-                      border: '1px solid var(--gold-border)',
-                      borderRadius: '50%',
-                      width: '42px',
-                      height: '42px',
-                      cursor: 'pointer',
-                      fontSize: '1.2rem',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}
+                    className="project-modal-arrow project-modal-arrow--next"
+                    aria-label="الصورة التالية"
+                    title="الصورة التالية"
                   >
                     ⬅
                   </button>
 
                   {/* Counter Badge */}
-                  <div
-                    style={{
-                      position: 'absolute',
-                      bottom: '12px',
-                      left: '50%',
-                      transform: 'translateX(-50%)',
-                      background: 'rgba(0,0,0,0.8)',
-                      color: '#fff',
-                      fontSize: '0.75rem',
-                      padding: '3px 12px',
-                      borderRadius: '12px',
-                      border: '1px solid rgba(255,255,255,0.2)',
-                    }}
-                  >
+                  <div className="project-modal-counter">
                     {currentImgIndex + 1} / {allImages.length}
                   </div>
                 </>
@@ -574,6 +457,7 @@ function ProjectModal({ project, onClose }) {
 function AutoProjectsCarousel({ projects, onSelect }) {
   const containerRef = useRef(null)
   const isPaused = useRef(false)
+  const directionRef = useRef(1) // 1 = scroll forward, -1 = scroll backward
 
   const handleScroll = (dir) => {
     if (!containerRef.current) return
@@ -587,14 +471,23 @@ function AutoProjectsCarousel({ projects, onSelect }) {
     if (!el) return
 
     let animationFrameId
-    const speed = 0.6
+    const speed = 0.8
 
     const autoScroll = () => {
       if (!isPaused.current && el) {
-        if (Math.abs(el.scrollLeft) >= el.scrollWidth - el.clientWidth - 5) {
-          el.scrollLeft = 0
-        } else {
-          el.scrollLeft -= speed
+        const maxScroll = el.scrollWidth - el.clientWidth
+
+        // If content fits inside the container (fewer items), keep static!
+        if (maxScroll > 10) {
+          const currentScroll = Math.abs(el.scrollLeft)
+
+          if (currentScroll >= maxScroll - 5) {
+            directionRef.current = -1 // Turn back to start
+          } else if (currentScroll <= 5) {
+            directionRef.current = 1 // Go forward to end
+          }
+
+          el.scrollLeft -= speed * directionRef.current
         }
       }
       animationFrameId = requestAnimationFrame(autoScroll)
@@ -603,8 +496,6 @@ function AutoProjectsCarousel({ projects, onSelect }) {
     animationFrameId = requestAnimationFrame(autoScroll)
     return () => cancelAnimationFrame(animationFrameId)
   }, [])
-
-  const items = [...projects, ...projects]
 
   return (
     <div
@@ -617,7 +508,7 @@ function AutoProjectsCarousel({ projects, onSelect }) {
       {/* Controls Header */}
       <div className="portfolio-slider-controls">
         <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginLeft: 'auto', alignSelf: 'center' }}>
-          ✨ تمرير تلقائي (توقف بالمؤشر للمعاينة) ↔️
+          ✨ تمرير تلقائي مفعل (توقف بالمؤشر للمعاينة) ↔️
         </span>
         <button onClick={() => handleScroll('prev')} className="portfolio-slider-arrow" aria-label="المشروع السابق" title="المشروع السابق">
           ➔
@@ -629,9 +520,9 @@ function AutoProjectsCarousel({ projects, onSelect }) {
 
       {/* Track */}
       <div className="portfolio-carousel-track" ref={containerRef}>
-        {items.map((project, index) => (
-          <div key={index} className="portfolio-carousel-item">
-            <ProjectCard project={project} index={index % projects.length} onSelect={onSelect} />
+        {projects.map((project, index) => (
+          <div key={project.id || index} className="portfolio-carousel-item">
+            <ProjectCard project={project} index={index} onSelect={onSelect} />
           </div>
         ))}
       </div>
@@ -639,21 +530,41 @@ function AutoProjectsCarousel({ projects, onSelect }) {
   )
 }
 
-// ── Original Mobile Auto-Scrolling Carousel (Strictly for Mobile Phones <=768px)
+// ── Mobile Auto-Scrolling Carousel (Ping-Pong back-and-forth) ────────────────
 function MobileCarousel({ projects, onSelect }) {
+  const containerRef = useRef(null)
   const trackRef = useRef(null)
   const isPaused = useRef(false)
   const posRef = useRef(0)
+  const directionRef = useRef(1) // 1 = right, -1 = left
   const rafRef = useRef(null)
-  const SPEED = 0.5
+  const SPEED = 0.8
 
   const tick = useCallback(() => {
-    if (!trackRef.current) return
+    const track = trackRef.current
+    const container = containerRef.current
+    if (!track || !container) return
+
     if (!isPaused.current) {
-      posRef.current += SPEED
-      const trackWidth = trackRef.current.scrollWidth / 2
-      if (posRef.current >= trackWidth) posRef.current = 0
-      trackRef.current.style.transform = `translateX(${posRef.current}px)`
+      const maxScroll = track.scrollWidth - container.clientWidth
+
+      // If cards fit within screen width, stay static!
+      if (maxScroll <= 10) {
+        posRef.current = 0
+        track.style.transform = 'none'
+      } else {
+        posRef.current += SPEED * directionRef.current
+
+        if (posRef.current >= maxScroll) {
+          posRef.current = maxScroll
+          directionRef.current = -1 // Reach right end -> turn left
+        } else if (posRef.current <= 0) {
+          posRef.current = 0
+          directionRef.current = 1 // Reach left end -> turn right
+        }
+
+        track.style.transform = `translateX(${posRef.current}px)`
+      }
     }
     rafRef.current = requestAnimationFrame(tick)
   }, [])
@@ -663,17 +574,12 @@ function MobileCarousel({ projects, onSelect }) {
     return () => cancelAnimationFrame(rafRef.current)
   }, [tick])
 
-  const pause = () => {
-    isPaused.current = true
-  }
-  const resume = () => {
-    isPaused.current = false
-  }
-
-  const doubled = [...projects, ...projects]
+  const pause = () => { isPaused.current = true }
+  const resume = () => { isPaused.current = false }
 
   return (
     <div
+      ref={containerRef}
       className="mobile-carousel"
       onMouseDown={pause}
       onMouseUp={resume}
@@ -683,9 +589,9 @@ function MobileCarousel({ projects, onSelect }) {
       aria-label="معرض الأعمال — حرك للجانبين"
     >
       <div className="mobile-carousel__track" ref={trackRef}>
-        {doubled.map((project, index) => (
-          <div key={index} className="mobile-carousel__item">
-            <ProjectCard project={project} index={index % projects.length} onSelect={onSelect} />
+        {projects.map((project, index) => (
+          <div key={project.id || index} className="mobile-carousel__item">
+            <ProjectCard project={project} index={index} onSelect={onSelect} />
           </div>
         ))}
       </div>
@@ -699,17 +605,14 @@ export default function Portfolio({ projects = [], preview = false, hideHeader =
   const [loadedProjects, setLoadedProjects] = useState(projects)
   const [selectedProject, setSelectedProject] = useState(null)
 
+  // Sync when server-side props update
   useEffect(() => {
-    async function fetchLatest() {
-      const data = await getProjects()
-      if (data && data.length > 0) {
-        setLoadedProjects(data)
-      }
+    if (projects && projects.length > 0) {
+      setLoadedProjects(projects)
     }
-    fetchLatest()
-  }, [])
+  }, [projects])
 
-  const availableProjects = loadedProjects.length > 0 ? loadedProjects : projects.length > 0 ? projects : DEMO_PROJECTS
+  const availableProjects = loadedProjects.length > 0 ? loadedProjects : []
   const baseProjects = preview ? availableProjects.slice(0, 10) : availableProjects
 
   const filtered =

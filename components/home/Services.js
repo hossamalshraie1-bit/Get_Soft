@@ -4,56 +4,7 @@ import { useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
 import { getServices } from '@/lib/supabase'
 
-const DEFAULT_SERVICES = [
-  {
-    id: 's1',
-    icon: '🌐',
-    title: 'تطوير مواقع الويب',
-    description: 'نبني مواقع ويب احترافية وسريعة باستخدام Next.js وReact لضمان أفضل تجربة مستخدم وتحسين محركات البحث.',
-    features: ['Next.js & React', 'تصميم متجاوب', 'تحسين SEO', 'أداء عالي', 'لوحة تحكم'],
-    popular: true,
-  },
-  {
-    id: 's2',
-    icon: '📱',
-    title: 'تطبيقات الجوال',
-    description: 'نطور تطبيقات موبايل احترافية لـ iOS وAndroid بتجربة مستخدم استثنائية.',
-    features: ['iOS & Android', 'React Native / Flutter', 'UI/UX احترافي', 'إشعارات فورية'],
-    popular: false,
-  },
-  {
-    id: 's3',
-    icon: '⚙️',
-    title: 'الأنظمة المؤسسية',
-    description: 'نصمم وننفذ أنظمة إدارة متكاملة تناسب احتياجات شركتك من ERP وCRM إلى أنظمة المخازن.',
-    features: ['ERP & CRM', 'إدارة المخازن', 'تقارير', 'صلاحيات متعددة'],
-    popular: false,
-  },
-  {
-    id: 's4',
-    icon: '🎨',
-    title: 'تصميم UI/UX',
-    description: 'نصمم واجهات مستخدم جذابة وسهلة تجمع الجمال البصري بالوظائف العملية.',
-    features: ['Figma', 'Prototyping', 'هوية بصرية', 'دليل التصميم'],
-    popular: false,
-  },
-  {
-    id: 's5',
-    icon: '🛒',
-    title: 'التجارة الإلكترونية',
-    description: 'نبني متاجر إلكترونية متكاملة مع بوابات دفع آمنة وتجربة تسوق سلسة تزيد مبيعاتك.',
-    features: ['بوابات دفع', 'إدارة المنتجات', 'تتبع الطلبات', 'SEO متاجر'],
-    popular: false,
-  },
-  {
-    id: 's6',
-    icon: '🔧',
-    title: 'الاستضافة والصيانة',
-    description: 'استضافة موثوقة وسريعة مع صيانة دورية وتحديثات منتظمة على مدار الساعة.',
-    features: ['استضافة سحابية', 'SSL مجاني', 'نسخ احتياطية', 'دعم 24/7'],
-    popular: false,
-  },
-]
+
 
 // ── Single Service Card ───────────────────────────────────────────────────────
 function ServiceCard({ service, index, isWheelCard = false }) {
@@ -290,9 +241,7 @@ export default function Services({ services = [], showAll = false, hideHeader = 
   const activeServices =
     loadedServices && loadedServices.length > 0
       ? loadedServices
-      : services && services.length > 0
-        ? services
-        : DEFAULT_SERVICES
+      : (services || [])
 
   const displayedServices = activeServices
 

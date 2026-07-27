@@ -3,13 +3,6 @@
 import { useState, useEffect } from 'react'
 import { getTeam } from '@/lib/supabase'
 
-const DEFAULT_TEAM = [
-  { name: 'محمد الغامدي', role: 'المدير التقني', bio: 'خبرة أكثر من 8 سنوات في تطوير البرمجيات والأنظمة المؤسسية. متخصص في Next.js وNode.js وقواعد البيانات.' },
-  { name: 'ليلى الشمري', role: 'مصممة UI/UX', bio: 'مصممة إبداعية بخبرة 6 سنوات في تصميم واجهات المستخدم. متخصصة في Figma وتجربة المستخدم.' },
-  { name: 'عمر السعد', role: 'مطور موبايل', bio: 'مطور تطبيقات موبايل محترف بخبرة 5 سنوات في React Native وFlutter. نفّذ أكثر من 40 تطبيقاً ناجحاً.' },
-  { name: 'نورة الحربي', role: 'مديرة المشاريع', bio: 'خبرة في إدارة المشاريع التقنية وتوجيه فرق العمل لضمان جودة التسليم ورضا العملاء.' },
-]
-
 export default function TeamSection({ initialTeam = [] }) {
   const [team, setTeam] = useState(initialTeam)
 
@@ -23,7 +16,7 @@ export default function TeamSection({ initialTeam = [] }) {
     fetchLatest()
   }, [])
 
-  const activeTeam = team && team.length > 0 ? team : (initialTeam && initialTeam.length > 0 ? initialTeam : DEFAULT_TEAM)
+  const activeTeam = team && team.length > 0 ? team : (initialTeam || [])
 
   return (
     <section className="section" style={{ background: 'var(--bg-secondary)' }} aria-labelledby="team-heading">

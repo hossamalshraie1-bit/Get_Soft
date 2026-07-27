@@ -4,180 +4,17 @@ import { useState, useEffect } from 'react'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import { uploadToImageKit } from '@/lib/imagekit'
+import { supabase } from '@/lib/supabase'
 
-// Initial Mock Datasets
-const DEFAULT_SERVICES = [
-  {
-    id: 's1',
-    icon: '🌐',
-    title: 'تطوير مواقع الويب',
-    description: 'نبني مواقع ويب احترافية وسريعة باستخدام Next.js وReact لضمان أفضل تجربة مستخدم وتحسين محركات البحث.',
-    features: 'Next.js & React, تصميم متجاوب, تحسين SEO, أداء عالي, لوحة تحكم',
-    popular: true,
-  },
-  {
-    id: 's2',
-    icon: '📱',
-    title: 'تطبيقات الجوال',
-    description: 'نطور تطبيقات موبايل احترافية لـ iOS وAndroid بتجربة مستخدم استثنائية.',
-    features: 'iOS & Android, React Native / Flutter, UI/UX احترافي, إشعارات فورية',
-    popular: false,
-  },
-  {
-    id: 's3',
-    icon: '⚙️',
-    title: 'الأنظمة المؤسسية',
-    description: 'نصمم وننفذ أنظمة إدارة متكاملة تناسب احتياجات شركتك من ERP وCRM إلى أنظمة المخازن.',
-    features: 'ERP & CRM, إدارة المخازن, تقارير, صلاحيات متعددة',
-    popular: false,
-  },
-  {
-    id: 's4',
-    icon: '🎨',
-    title: 'تصميم UI/UX',
-    description: 'نصمم واجهات مستخدم جذابة وسهلة تجمع الجمال البصري بالوظائف العملية.',
-    features: 'Figma, Prototyping, هوية بصرية, دليل التصميم',
-    popular: false,
-  },
-  {
-    id: 's5',
-    icon: '🛒',
-    title: 'التجارة الإلكترونية',
-    description: 'نبني متاجر إلكترونية متكاملة مع بوابات دفع آمنة وتجربة تسوق سلسة تزيد مبيعاتك.',
-    features: 'بوابات دفع, إدارة المنتجات, تتبع الطلبات, SEO متاجر',
-    popular: false,
-  },
-  {
-    id: 's6',
-    icon: '🔧',
-    title: 'الاستضافة والصيانة',
-    description: 'استضافة موثوقة وسريعة مع صيانة دورية وتحديثات منتظمة على مدار الساعة.',
-    features: 'استضافة سحابية, SSL مجاني, نسخ احتياطية, دعم 24/7',
-    popular: false,
-  },
-]
-
-const DEFAULT_PROJECTS = [
-  {
-    id: 'p1',
-    title: 'منصة التجارة الإلكترونية الذكية',
-    category: 'ecommerce',
-    client: 'متجر الأناقة',
-    year: 2024,
-    tech_stack: 'Next.js, Supabase, Stripe',
-    image_url: '',
-  },
-  {
-    id: 'p2',
-    title: 'تطبيق إدارة المطاعم',
-    category: 'mobile',
-    client: 'سلسلة مطاعم النخبة',
-    year: 2024,
-    tech_stack: 'React Native, Node.js, MongoDB',
-    image_url: '',
-  },
-  {
-    id: 'p3',
-    title: 'نظام ERP للشركات',
-    category: 'system',
-    client: 'شركة الريادة التجارية',
-    year: 2023,
-    tech_stack: 'React, PostgreSQL, Python',
-    image_url: '',
-  },
-  {
-    id: 'p4',
-    title: 'موقع وكالة سفر احترافي',
-    category: 'web',
-    client: 'وكالة الأفق للسفر',
-    year: 2024,
-    tech_stack: 'Next.js, Tailwind, Supabase',
-    image_url: '',
-  },
-  {
-    id: 'p5',
-    title: 'تطبيق التوصيل السريع',
-    category: 'mobile',
-    client: 'فليت اكسبرس',
-    year: 2023,
-    tech_stack: 'Flutter, Firebase, Google Maps',
-    image_url: '',
-  },
-  {
-    id: 'p6',
-    title: 'موقع عيادة طبية متكامل',
-    category: 'web',
-    client: 'عيادة الرعاية الصحية',
-    year: 2024,
-    tech_stack: 'Next.js, Supabase, Stripe',
-    image_url: '',
-  },
-  {
-    id: 'p7',
-    title: 'لوحة تحكم إدارية شاملة',
-    category: 'system',
-    client: 'مجموعة الأفق التقنية',
-    year: 2024,
-    tech_stack: 'React, Tailwind, Express',
-    image_url: '',
-  },
-  {
-    id: 'p8',
-    title: 'متجر المنتجات العضوية',
-    category: 'ecommerce',
-    client: 'جرين لايف',
-    year: 2024,
-    tech_stack: 'Next.js, Shopify API',
-    image_url: '',
-  },
-  {
-    id: 'p9',
-    title: 'تطبيق اللياقة والصحة',
-    category: 'mobile',
-    client: 'فتنس كلوپ',
-    year: 2023,
-    tech_stack: 'React Native, GraphQL',
-    image_url: '',
-  },
-  {
-    id: 'p10',
-    title: 'منصة التعلم عن بُعد',
-    category: 'web',
-    client: 'أكاديمية المستقبل',
-    year: 2024,
-    tech_stack: 'Next.js, PostgreSQL, AWS',
-    image_url: '',
-  },
-]
-
-const DEFAULT_TESTIMONIALS = [
-  {
-    id: 't1',
-    name: 'أحمد العمري',
-    position: 'المدير التنفيذي',
-    company: 'شركة الريادة التجارية',
-    content: 'تعاملنا مع Get Soft لتطوير نظام إدارة متكامل لشركتنا. النتيجة كانت مذهلة، الفريق محترف جداً والتسليم في الوقت المحدد.',
-    rating: 5,
-  },
-  {
-    id: 't2',
-    name: 'سارة المحمد',
-    position: 'مديرة التسويق',
-    company: 'متجر الأناقة',
-    content: 'صمموا لنا متجراً إلكترونياً رائعاً زاد من مبيعاتنا بنسبة 200%. التصميم احترافي والأداء ممتاز.',
-    rating: 5,
-  },
-  {
-    id: 't3',
-    name: 'خالد الزهراني',
-    position: 'مؤسس',
-    company: 'تطبيق التوصيل السريع',
-    content: 'طوروا تطبيق التوصيل الخاص بنا بشكل رائع. واجهة المستخدم سلسة والأداء قوي. الفريق استجاب لكل طلباتنا.',
-    rating: 5,
-  },
-]
-
-const DEFAULT_TEAM = []
+import {
+  getProjects,
+  getServices,
+  getTestimonials,
+  getSiteSettings,
+  createProject,
+  updateProject,
+  deleteProject,
+} from '@/lib/supabase'
 
 const DEFAULT_SETTINGS = {
   hero_title: 'نبني المستقبل الرقمي لشركتك',
@@ -194,8 +31,10 @@ const DEFAULT_SETTINGS = {
 
 export default function AdminPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
+  const [loginLoading, setLoginLoading] = useState(false)
 
   // Current active tab
   const [activeTab, setActiveTab] = useState('overview')
@@ -208,11 +47,11 @@ export default function AdminPage() {
     setTimeout(() => setToast({ show: false, message: '', type: 'success' }), 3000)
   }
 
-  // Datasets State
-  const [services, setServices] = useState(DEFAULT_SERVICES)
-  const [projects, setProjects] = useState(DEFAULT_PROJECTS)
-  const [testimonials, setTestimonials] = useState(DEFAULT_TESTIMONIALS)
-  const [team, setTeam] = useState(DEFAULT_TEAM)
+  // Datasets State (Initialized empty to load directly from Supabase)
+  const [services, setServices] = useState([])
+  const [projects, setProjects] = useState([])
+  const [testimonials, setTestimonials] = useState([])
+  const [team, setTeam] = useState([])
   const [settings, setSettings] = useState(DEFAULT_SETTINGS)
 
   // Search Filter Query
@@ -289,29 +128,41 @@ export default function AdminPage() {
     notify('تم تعيين الصورة كصورة رئيسية للمشروع ⭐')
   }
 
-  // Load from localStorage on mount
+  // Check Supabase session on mount and load data
   useEffect(() => {
-    try {
-      const savedAuth = localStorage.getItem('admin_auth')
-      if (savedAuth === 'true') setIsAuthenticated(true)
+    async function init() {
+      try {
+        // Check active Supabase session
+        const { data: { session } } = await supabase.auth.getSession()
+        if (session) {
+          setIsAuthenticated(true)
+        }
 
-      const sServices = localStorage.getItem('admin_services')
-      if (sServices) setServices(JSON.parse(sServices))
+        // Load live data from Supabase
+        const [pData, sData, tData, stData] = await Promise.all([
+          getProjects(),
+          getServices(),
+          getTestimonials(),
+          getSiteSettings(),
+        ])
 
-      const sProjects = localStorage.getItem('admin_projects')
-      if (sProjects) setProjects(JSON.parse(sProjects))
-
-      const sTestimonials = localStorage.getItem('admin_testimonials')
-      if (sTestimonials) setTestimonials(JSON.parse(sTestimonials))
-
-      const sTeam = localStorage.getItem('admin_team')
-      if (sTeam) setTeam(JSON.parse(sTeam))
-
-      const sSettings = localStorage.getItem('admin_settings')
-      if (sSettings) setSettings(JSON.parse(sSettings))
-    } catch (e) {
-      console.error('Error loading admin state', e)
+        if (pData) setProjects(pData)
+        if (sData) setServices(sData)
+        if (tData) setTestimonials(tData)
+        if (stData && Object.keys(stData).length > 0) {
+          setSettings((prev) => ({ ...prev, ...stData }))
+        }
+      } catch (e) {
+        console.error('Error initializing admin page', e)
+      }
     }
+    init()
+
+    // Listen for auth state changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setIsAuthenticated(!!session)
+    })
+    return () => subscription.unsubscribe()
   }, [])
 
   // Helper sync to localStorage
@@ -336,22 +187,33 @@ export default function AdminPage() {
     localStorage.setItem('admin_settings', JSON.stringify(data))
   }
 
-  // Handle Login
-  const handleLogin = (e) => {
+  // Handle Login via Supabase Auth
+  const handleLogin = async (e) => {
     e.preventDefault()
-    if (password === 'getsoft2026') {
-      setIsAuthenticated(true)
-      localStorage.setItem('admin_auth', 'true')
-      setError('')
-      notify('تم تسجيل الدخول بنجاح')
-    } else {
-      setError('كلمة المرور غير صحيحة!')
+    setError('')
+    setLoginLoading(true)
+    try {
+      const { data, error: authError } = await supabase.auth.signInWithPassword({ email, password })
+      if (authError) {
+        setError('البريد الإلكتروني أو كلمة المرور غير صحيحة!')
+        return
+      }
+      if (data?.session) {
+        setIsAuthenticated(true)
+        notify('تم تسجيل الدخول بنجاح ✨')
+      }
+    } catch (err) {
+      setError('حدث خطأ أثناء تسجيل الدخول، حاول مرة أخرى')
+    } finally {
+      setLoginLoading(false)
     }
   }
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    await supabase.auth.signOut()
     setIsAuthenticated(false)
-    localStorage.removeItem('admin_auth')
+    setEmail('')
+    setPassword('')
   }
 
   // Modal Open Handler
@@ -380,81 +242,143 @@ export default function AdminPage() {
   }
 
   // Generic Submit Handler for Forms
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault()
+
     if (modalType === 'service') {
-      if (editingItem) {
-        saveServices(services.map((s) => (s.id === editingItem.id ? { ...formData, id: s.id } : s)))
-        notify('تم تعديل الخدمة بنجاح')
-      } else {
-        const newItem = { ...formData, id: 's_' + Date.now() }
-        saveServices([newItem, ...services])
-        notify('تمت إضافة الخدمة بنجاح')
+      const payload = {
+        ...formData,
+        features: typeof formData.features === 'string'
+          ? formData.features.split(',').map((s) => s.trim()).filter(Boolean)
+          : formData.features || [],
       }
+
+      if (editingItem) {
+        const res = await updateService(editingItem.id, payload)
+        if (res.success) notify('تم تعديل الخدمة بنجاح في Supabase ✨')
+        else notify(res.error || 'حدث خطأ أثناء تعديل الخدمة', 'error')
+      } else {
+        const res = await createService(payload)
+        if (res.success) notify('تمت إضافة الخدمة بنجاح إلى Supabase ✨')
+        else notify(res.error || 'حدث خطأ أثناء إضافة الخدمة', 'error')
+      }
+      const updatedServices = await getServices()
+      setServices(updatedServices)
     } else if (modalType === 'project') {
-      if (editingItem) {
-        saveProjects(projects.map((p) => (p.id === editingItem.id ? { ...formData, id: p.id } : p)))
-        notify('تم تعديل المشروع بنجاح')
-      } else {
-        const newItem = { ...formData, id: 'p_' + Date.now() }
-        saveProjects([newItem, ...projects])
-        notify('تمت إضافة المشروع بنجاح')
+      const techStackArr = typeof formData.tech_stack === 'string'
+        ? formData.tech_stack.split(',').map((s) => s.trim()).filter(Boolean)
+        : Array.isArray(formData.tech_stack)
+          ? formData.tech_stack
+          : []
+
+      const imagesArr = Array.isArray(formData.images)
+        ? formData.images
+        : typeof formData.images === 'string' && formData.images.trim().length > 0
+          ? formData.images.split(',').map((s) => s.trim()).filter(Boolean)
+          : formData.image_url
+            ? [formData.image_url]
+            : []
+
+      const payload = {
+        title: formData.title,
+        category: formData.category || 'web',
+        description: formData.description || '',
+        client: formData.client || '',
+        year: parseInt(formData.year) || new Date().getFullYear(),
+        tech_stack: techStackArr,
+        image_url: formData.image_url || imagesArr[0] || '',
+        images: imagesArr,
+        project_url: formData.project_url || '',
+        featured: formData.featured || false,
       }
+
+      if (editingItem) {
+        const res = await updateProject(editingItem.id, payload)
+        if (res.success) notify('تم تعديل المشروع بنجاح في Supabase 🎨')
+        else notify(res.error || 'حدث خطأ أثناء تعديل المشروع', 'error')
+      } else {
+        const res = await createProject(payload)
+        if (res.success) notify('تمت إضافة المشروع بنجاح إلى Supabase 🎨')
+        else notify(res.error || 'حدث خطأ أثناء إضافة المشروع', 'error')
+      }
+      const updatedProjects = await getProjects()
+      setProjects(updatedProjects)
     } else if (modalType === 'testimonial') {
-      if (editingItem) {
-        saveTestimonials(testimonials.map((t) => (t.id === editingItem.id ? { ...formData, id: t.id } : t)))
-        notify('تم تعديل الرأي بنجاح')
-      } else {
-        const newItem = { ...formData, id: 't_' + Date.now() }
-        saveTestimonials([newItem, ...testimonials])
-        notify('تمت إضافة الرأي بنجاح')
+      const payload = {
+        name: formData.name,
+        position: formData.position || '',
+        company: formData.company || '',
+        content: formData.content,
+        rating: parseInt(formData.rating) || 5,
       }
-    } else if (modalType === 'team') {
+
       if (editingItem) {
-        saveTeam(team.map((m) => (m.id === editingItem.id ? { ...formData, id: m.id } : m)))
-        notify('تم تعديل بيانات العضو بنجاح')
+        const res = await updateTestimonial(editingItem.id, payload)
+        if (res.success) notify('تم تعديل الرأي بنجاح في Supabase 💬')
+        else notify(res.error || 'حدث خطأ أثناء تعديل الرأي', 'error')
       } else {
-        const newItem = { ...formData, id: 'tm_' + Date.now() }
-        saveTeam([newItem, ...team])
-        notify('تمت إضافة العضو بنجاح')
+        const res = await createTestimonial(payload)
+        if (res.success) notify('تمت إضافة الرأي بنجاح إلى Supabase 💬')
+        else notify(res.error || 'حدث خطأ أثناء إضافة الرأي', 'error')
       }
+      const updatedTestimonials = await getTestimonials()
+      setTestimonials(updatedTestimonials)
     }
     closeModal()
   }
 
   // Delete Item Handlers
-  const handleDeleteService = (id) => {
-    if (confirm('هل أنت تأكد من رغبتك في حذف هذه الخدمة؟')) {
-      saveServices(services.filter((s) => s.id !== id))
-      notify('تم حذف الخدمة بنجاح', 'error')
+  const handleDeleteService = async (id) => {
+    if (confirm('هل أنت تأكد من رغبتك في حذف هذه الخدمة من قواعد البيانات؟')) {
+      const ok = await deleteService(id)
+      if (ok) {
+        notify('تم حذف الخدمة بنجاح من Supabase', 'error')
+        const updated = await getServices()
+        setServices(updated)
+      } else {
+        notify('حدث خطأ أثناء حذف الخدمة', 'error')
+      }
     }
   }
 
-  const handleDeleteProject = (id) => {
-    if (confirm('هل أنت تأكد من رغبتك في حذف هذا المشروع؟')) {
-      saveProjects(projects.filter((p) => p.id !== id))
-      notify('تم حذف المشروع بنجاح', 'error')
+  const handleDeleteProject = async (id) => {
+    if (confirm('هل أنت تأكد من رغبتك في حذف هذا المشروع من قواعد البيانات؟')) {
+      const ok = await deleteProject(id)
+      if (ok) {
+        notify('تم حذف المشروع بنجاح من Supabase', 'error')
+        const updated = await getProjects()
+        setProjects(updated)
+      } else {
+        notify('حدث خطأ أثناء حذف المشروع', 'error')
+      }
     }
   }
 
-  const handleDeleteTestimonial = (id) => {
-    if (confirm('هل أنت تأكد من رغبتك في حذف هذا الرأي؟')) {
-      saveTestimonials(testimonials.filter((t) => t.id !== id))
-      notify('تم حذف الرأي بنجاح', 'error')
+  const handleDeleteTestimonial = async (id) => {
+    if (confirm('هل أنت تأكد من رغبتك في حذف هذا الرأي من قواعد البيانات؟')) {
+      const ok = await deleteTestimonial(id)
+      if (ok) {
+        notify('تم حذف الرأي بنجاح من Supabase', 'error')
+        const updated = await getTestimonials()
+        setTestimonials(updated)
+      } else {
+        notify('حدث خطأ أثناء حذف الرأي', 'error')
+      }
     }
   }
 
-  const handleDeleteTeam = (id) => {
-    if (confirm('هل أنت تأكد من رغبتك في حذف هذا العضو؟')) {
-      saveTeam(team.filter((tm) => tm.id !== id))
-      notify('تم حذف العضو بنجاح', 'error')
-    }
-  }
-
-  const handleSettingsSubmit = (e) => {
+  const handleSettingsSubmit = async (e) => {
     e.preventDefault()
-    saveSettingsData(settings)
-    notify('تم حفظ إعدادات الموقع بنجاح ✨')
+    const res = await updateSiteSettings(settings)
+    if (res.success) {
+      notify('تم حفظ وتحديث إعدادات الموقع بنجاح في Supabase ✨')
+      const updatedSettings = await getSiteSettings()
+      if (updatedSettings && Object.keys(updatedSettings).length > 0) {
+        setSettings((prev) => ({ ...prev, ...updatedSettings }))
+      }
+    } else {
+      notify(res.error || 'حدث خطأ أثناء حفظ الإعدادات', 'error')
+    }
   }
 
   // Render Login view if unauthenticated
@@ -462,45 +386,106 @@ export default function AdminPage() {
     return (
       <>
         <Navbar />
-        <main className="min-h-screen flex items-center justify-center" style={{ paddingTop: '130px', paddingBottom: '80px' }}>
-          <div className="card" style={{ width: '100%', maxWidth: '420px', margin: '0 auto', padding: 'var(--space-8)' }}>
-            <div style={{ textAlign: 'center', marginBottom: 'var(--space-6)' }}>
+        <main
+          style={{
+            minHeight: '100vh',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            paddingTop: '100px',
+            paddingBottom: '80px',
+            background: 'var(--bg-primary)',
+          }}
+        >
+          <div
+            className="card"
+            style={{
+              width: '100%',
+              maxWidth: '440px',
+              margin: '0 auto',
+              padding: 'var(--space-8)',
+              border: '1px solid var(--gold-border)',
+              boxShadow: '0 0 40px rgba(201,168,76,0.12)',
+            }}
+          >
+            {/* Logo & Title */}
+            <div style={{ textAlign: 'center', marginBottom: 'var(--space-7)' }}>
               <img
                 src="/logo.png"
                 alt="Get Soft Logo"
                 style={{
-                  height: '64px',
-                  width: '64px',
-                  margin: '0 auto var(--space-3)',
-                  borderRadius: '14px',
+                  height: '68px',
+                  width: '68px',
+                  margin: '0 auto var(--space-4)',
+                  borderRadius: '16px',
                   objectFit: 'cover',
-                  boxShadow: '0 6px 20px rgba(201, 168, 76, 0.4)',
-                  border: '1px solid var(--gold-border)',
+                  display: 'block',
+                  boxShadow: '0 6px 24px rgba(201,168,76,0.45)',
+                  border: '2px solid var(--gold-border)',
                 }}
               />
-              <h2 style={{ fontSize: 'var(--font-size-2xl)', fontWeight: 800, marginTop: 'var(--space-3)' }}>
+              <h1 style={{ fontSize: 'var(--font-size-2xl)', fontWeight: 900, marginBottom: 'var(--space-2)' }}>
                 لوحة التحكم <span className="text-gradient">Get Soft</span>
-              </h2>
-              <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-sm)', marginTop: 'var(--space-2)' }}>
-                أدخل كلمة المرور الخاصة بالمدير للوصول للوحة
+              </h1>
+              <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-sm)' }}>
+                أدخل بيانات حساب المدير للوصول إلى اللوحة
               </p>
             </div>
-            <form onSubmit={handleLogin}>
-              <div className="form-group mb-4">
-                <label className="form-label" htmlFor="admin-password">كلمة المرور</label>
+
+            {/* Login Form */}
+            <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
+              <div className="form-group">
+                <label className="form-label" htmlFor="admin-email">📧 البريد الإلكتروني</label>
+                <input
+                  type="email"
+                  id="admin-email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="form-control"
+                  placeholder="admin@example.com"
+                  required
+                  autoComplete="email"
+                  style={{ direction: 'ltr', textAlign: 'left' }}
+                />
+              </div>
+
+              <div className="form-group">
+                <label className="form-label" htmlFor="admin-password">🔒 كلمة المرور</label>
                 <input
                   type="password"
                   id="admin-password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="form-control text-center"
+                  className="form-control"
                   placeholder="••••••••"
                   required
+                  autoComplete="current-password"
                 />
               </div>
-              {error && <p style={{ color: '#ef4444', fontSize: 'var(--font-size-sm)', textAlign: 'center', marginBottom: 'var(--space-4)' }}>{error}</p>}
-              <button type="submit" className="btn btn-primary w-full" style={{ justifyContent: 'center', width: '100%' }}>
-                تسجيل الدخول ✨
+
+              {error && (
+                <div
+                  style={{
+                    background: 'rgba(239,68,68,0.1)',
+                    border: '1px solid rgba(239,68,68,0.3)',
+                    borderRadius: 'var(--radius-md)',
+                    padding: '10px 14px',
+                    color: '#ef4444',
+                    fontSize: 'var(--font-size-sm)',
+                    textAlign: 'center',
+                  }}
+                >
+                  ⚠️ {error}
+                </div>
+              )}
+
+              <button
+                type="submit"
+                className="btn btn-primary"
+                disabled={loginLoading}
+                style={{ justifyContent: 'center', width: '100%', marginTop: 'var(--space-2)', opacity: loginLoading ? 0.7 : 1 }}
+              >
+                {loginLoading ? 'جاري تسجيل الدخول...' : 'تسجيل الدخول ✨'}
               </button>
             </form>
           </div>

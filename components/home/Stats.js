@@ -39,15 +39,8 @@ function AnimatedCounter({ target, duration = 2000 }) {
   return <span ref={ref}>{prefix}{count}</span>
 }
 
-const DEFAULT_STATS = [
-  { icon: '🚀', value: '+150', label: 'مشروع منجز' },
-  { icon: '🤝', value: '+80', label: 'عميل راضٍ' },
-  { icon: '⭐', value: '+5', label: 'سنوات خبرة' },
-  { icon: '💻', value: '+20', label: 'تقنية متقنة' },
-]
-
 export default function Stats({ stats }) {
-  const activeStats = (stats && stats.length > 0) ? stats : DEFAULT_STATS
+  const activeStats = (stats && stats.length > 0) ? stats : []
   return (
     <section className="stats-bar" aria-label="إحصائيات الشركة">
       <div className="container">

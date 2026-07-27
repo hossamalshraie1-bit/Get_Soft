@@ -2,34 +2,6 @@
 
 import { useState, useRef, useEffect } from 'react'
 import { getTestimonials } from '@/lib/supabase'
-
-const DEFAULT_TESTIMONIALS = [
-  {
-    id: 1,
-    name: 'أحمد العمري',
-    position: 'المدير التنفيذي',
-    company: 'شركة الريادة التجارية',
-    content: 'تعاملنا مع Get Soft لتطوير نظام إدارة متكامل لشركتنا. النتيجة كانت مذهلة، الفريق محترف جداً والتسليم في الوقت المحدد. أنصح بهم بشدة لكل من يبحث عن جودة حقيقية.',
-    rating: 5,
-  },
-  {
-    id: 2,
-    name: 'سارة المحمد',
-    position: 'مديرة التسويق',
-    company: 'متجر الأناقة',
-    content: 'صمموا لنا متجراً إلكترونياً رائعاً زاد من مبيعاتنا بنسبة 200%. التصميم احترافي والأداء ممتاز. سنتعاون معهم دائماً في مشاريعنا القادمة.',
-    rating: 5,
-  },
-  {
-    id: 3,
-    name: 'خالد الزهراني',
-    position: 'مؤسس',
-    company: 'تطبيق التوصيل السريع',
-    content: 'طوروا تطبيق التوصيل الخاص بنا بشكل رائع. واجهة المستخدم سلسة والأداء قوي. الفريق استجاب لكل طلباتنا باحترافية عالية.',
-    rating: 5,
-  },
-]
-
 function StarRating({ rating }) {
   return (
     <div className="stars" aria-label={`التقييم: ${rating} من 5 نجوم`}>
@@ -56,9 +28,7 @@ export default function Testimonials({ testimonials = [] }) {
 
   const activeTestimonials = (loadedTestimonials && loadedTestimonials.length > 0)
     ? loadedTestimonials
-    : (testimonials && testimonials.length > 0)
-      ? testimonials
-      : DEFAULT_TESTIMONIALS
+    : (testimonials || [])
 
   const [activeIndex, setActiveIndex] = useState(0)
   const gridRef = useRef(null)
