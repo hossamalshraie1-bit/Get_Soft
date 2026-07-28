@@ -143,7 +143,7 @@ function ProjectCard({ project, index, onSelect }) {
             👁️ تفاصيل المشروع
           </button>
 
-          {project.project_url && (
+          {/* {project.project_url && (
             <a
               href={project.project_url}
               target="_blank"
@@ -155,7 +155,7 @@ function ProjectCard({ project, index, onSelect }) {
             >
               🔗 زيارة ↗
             </a>
-          )}
+          )} */}
         </div>
       </div>
     </article>
@@ -197,7 +197,7 @@ function ProjectModal({ project, onClose }) {
         if (rawImages.trim().startsWith('[')) {
           rawImages = JSON.parse(rawImages)
         }
-      } catch (e) {}
+      } catch (e) { }
     }
 
     if (Array.isArray(rawImages)) {
