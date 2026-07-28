@@ -311,7 +311,45 @@ export default function Services({ services = [], showAll = false, hideHeader = 
         }
       `}</style>
 
-      {/*  */}
+      <div className="container">
+        {/* Section Title */}
+        {!hideHeader && (
+          <div className="section-title reveal">
+            <div className="section-title__tag">⚡ خدماتنا</div>
+            <h2 className="section-title__heading" id="services-heading">
+              حلول تقنية <span className="text-gradient">متكاملة</span>
+            </h2>
+            <div className="gold-divider" />
+            <p className="section-title__description">
+              نقدم مجموعة شاملة من الخدمات التقنية لمساعدتك على بناء حضور رقمي قوي ومتميز.
+            </p>
+          </div>
+        )}
+
+        {/* Home Page Desktop Slider View */}
+        {!showAll ? (
+          <>
+            <ServicesDesktopSlider services={displayedServices} />
+            <ServicesMobileStrip services={displayedServices} />
+          </>
+        ) : (
+          /* Services Page Grid View */
+          <div className="services-grid">
+            {displayedServices.map((service, index) => (
+              <ServiceCard key={service.id || index} service={service} index={index} />
+            ))}
+          </div>
+        )}
+
+        {/* View All Button — Home page preview only */}
+        {!showAll && (
+          <div style={{ textAlign: 'center', marginTop: 'var(--space-12)' }}>
+            <Link href="/services" className="btn btn-secondary btn--lg" id="view-all-services">
+              عرض جميع الخدمات ←
+            </Link>
+          </div>
+        )}
+      </div>
     </section>
   )
 }
