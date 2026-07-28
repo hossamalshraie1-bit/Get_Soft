@@ -102,7 +102,7 @@ function ProjectCard({ project, index, onSelect }) {
       </div>
 
       {/* Body */}
-      <div className="project-card__body" style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+      {/* <div className="project-card__body" style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
         <div className="project-card__category">{categoryLabel}</div>
         <h3 className="project-card__title" itemProp="name">
           {project.title}
@@ -156,8 +156,8 @@ function ProjectCard({ project, index, onSelect }) {
               🔗 زيارة ↗
             </a>
           )} */}
-        </div>
-      </div>
+      {/* </div> */}
+      {/* </div>  */}
     </article>
   )
 }
