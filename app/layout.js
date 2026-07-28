@@ -163,7 +163,8 @@ const websiteSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
   url: 'https://getsoft.vercel.app',
-  name: 'جيت سوفت',
+  name: 'Get Soft',
+  alternateName: 'جيت سوفت',
   description: 'شركة برمجيات وتصميم مواقع الويب',
   inLanguage: 'ar',
   potentialAction: {
