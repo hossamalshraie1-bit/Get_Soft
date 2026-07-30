@@ -10,7 +10,7 @@ export const metadata = {
   alternates: { canonical: 'https://getsoft.vercel.app/services' },
   openGraph: {
     title: 'خدماتنا | Get Soft',
-    description: 'خدمات برمجية متكاملة للشركات والمؤسسات في الجمهورية اليمنية.',
+    description: 'خدمات برمجية متكاملة للشركات والمؤسسات.',
     url: 'https://getsoft.vercel.app/services',
   },
 }
