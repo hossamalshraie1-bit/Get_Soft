@@ -112,7 +112,12 @@ export default function Testimonials({ testimonials = [] }) {
             >
               <div className="testimonial-card__quote" aria-hidden="true">&quot;</div>
 
-              <meta itemProp="reviewRating" content={testimonial.rating} />
+              <div itemProp="itemReviewed" itemScope itemType="https://schema.org/Organization">
+                <meta itemProp="name" content="Get Soft" />
+              </div>
+              <div itemProp="reviewRating" itemScope itemType="https://schema.org/Rating">
+                <meta itemProp="ratingValue" content={testimonial.rating} />
+              </div>
               <p className="testimonial-card__content" itemProp="reviewBody">
                 {testimonial.content}
               </p>
