@@ -5,11 +5,11 @@ export const metadata = {
   title: 'من نحن | Get Soft',
   description:
     'تعرف على شركة Get Soft، قصة نجاحنا، قيمنا، ورؤيتنا في تقديم أفضل الحلول البرمجية وتصميم مواقع الويب وتطبيقات الموبايل بأعلى جودة.',
-  alternates: { canonical: 'https://getsoft.ye/about' },
+  alternates: { canonical: 'https://getsoft.vercel.app/about' },
   openGraph: {
     title: 'من نحن | Get Soft',
     description: 'تعرف على قصة نجاح وقيم وفريق عمل Get Soft للبرمجيات.',
-    url: 'https://getsoft.ye/about',
+    url: 'https://getsoft.vercel.app/about',
   },
 }
 
