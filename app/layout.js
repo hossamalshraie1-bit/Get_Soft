@@ -335,7 +335,7 @@ const businessSchema = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
   name: 'Get Soft',
-  alternateName: 'جيت سوفت',
+  alternateName: 'جيت سوفت للبرمجيات',
   url: 'https://getsoft.vercel.app',
   image: 'https://getsoft.vercel.app/logo.png',
   logo: 'https://getsoft.vercel.app/logo.png',
@@ -349,7 +349,7 @@ const businessSchema = {
   },
   contactPoint: {
     '@type': 'ContactPoint',
-    contactType: 'customer service',
+    contactType: 'Customer Service',
     telephone: '+967-776-158-797',
     email: 'getsoft2025@gmail.com',
     availableLanguage: ['Arabic'],
@@ -383,16 +383,11 @@ const businessSchema = {
 const websiteSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
-  url: 'https://getsoft.vercel.app',
   name: 'Get Soft',
   alternateName: 'جيت سوفت',
+  url: 'https://getsoft.vercel.app',
   description: 'شركة برمجيات وتصميم مواقع الويب',
   inLanguage: 'ar',
-  potentialAction: {
-    '@type': 'SearchAction',
-    target: 'https://getsoft.vercel.app/portfolio?q={search_term_string}',
-    'query-input': 'required name=search_term_string',
-  },
 }
 
 export default function RootLayout({ children }) {

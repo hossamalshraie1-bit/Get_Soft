@@ -58,7 +58,7 @@ export default function Hero() {
             <span className="hero__tag-dot" aria-hidden="true" />
             🚀 شركة برمجيات احترافية في السعودية
           </div> */}
-
+          <h1 className="text-gradient">Get Soft</h1>
           <h1 className="hero__title">
             نبني{' '}
             <span className="text-gradient">مستقبلك</span>

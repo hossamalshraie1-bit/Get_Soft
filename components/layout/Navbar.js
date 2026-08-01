@@ -56,12 +56,12 @@ export default function Navbar() {
                   border: '1px solid var(--gold-border, rgba(201, 168, 76, 0.4))',
                 }}
               />
-              <span className="navbar__logo-text">Get Soft</span>
+              <h1 className="navbar__logo-text">Get Soft</h1>
             </Link>
 
             {/* Mobile Theme Toggle (only visible on mobile layout) */}
-            <button 
-              onClick={toggleTheme} 
+            <button
+              onClick={toggleTheme}
               className="theme-toggle-btn mobile-theme-btn"
               aria-label="تبديل المظهر"
             >
@@ -87,8 +87,8 @@ export default function Navbar() {
 
           {/* CTA Button & Desktop Theme Toggle */}
           <div className="navbar__actions" style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)' }}>
-            <button 
-              onClick={toggleTheme} 
+            <button
+              onClick={toggleTheme}
               className="theme-toggle-btn desktop-theme-btn"
               aria-label="تبديل المظهر"
             >

@@ -44,7 +44,7 @@ export default function Footer() {
             </p>
             <div className="footer__social" aria-label="روابط التواصل الاجتماعي">
               <a
-                href="https://twitter.com/getsoft_ye"
+                href="https://twitter.com/getsoft2025"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="footer__social-link"
@@ -64,7 +64,7 @@ export default function Footer() {
                 📷
               </a>
               <a
-                href="https://linkedin.com/company/getsoft"
+                href="https://linkedin.com/company/getsoft2025"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="footer__social-link"
