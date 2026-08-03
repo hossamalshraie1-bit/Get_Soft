@@ -6,6 +6,6 @@ export default function robots() {
       allow: '/',
       disallow: ['/admin', '/admin/'],
     },
-    sitemap: [`${baseUrl}/sitemap.xml`, `${baseUrl}/rss.xml`],
+    sitemap: [`${baseUrl}/sitemap.xml`, `${baseUrl}/rss.xml`, `${baseUrl}/atom.xml`],
   }
 }
