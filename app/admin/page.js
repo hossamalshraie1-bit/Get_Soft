@@ -69,6 +69,33 @@ export default function AdminPage() {
   const [formData, setFormData] = useState({})
   const [uploadingImages, setUploadingImages] = useState(false)
 
+  // Helper function to safely parse project images array in any format
+  const parseImagesList = (rawImages, mainUrl) => {
+    let list = []
+    if (Array.isArray(rawImages)) {
+      list = rawImages
+    } else if (typeof rawImages === 'string' && rawImages.trim().length > 0) {
+      try {
+        if (rawImages.trim().startsWith('[')) {
+          list = JSON.parse(rawImages)
+        } else {
+          list = rawImages.split(',').map((s) => s.trim())
+        }
+      } catch (e) {
+        list = rawImages.split(',').map((s) => s.trim())
+      }
+    }
+    if (!Array.isArray(list)) list = []
+    list = list.map((img) => String(img).replace(/^[\[\]"'`\s]+|[\[\]"'`\s]+$/g, '')).filter(Boolean)
+    if (mainUrl) {
+      const cleanMain = String(mainUrl).replace(/^[\[\]"'`\s]+|[\[\]"'`\s]+$/g, '').trim()
+      if (cleanMain && !list.includes(cleanMain)) {
+        list.unshift(cleanMain)
+      }
+    }
+    return list
+  }
+
   // ImageKit Upload Handlers
   const handleImageFilesUpload = async (e) => {
     const files = Array.from(e.target.files)
@@ -80,13 +107,7 @@ export default function AdminPage() {
       const results = await Promise.all(uploadPromises)
       const uploadedUrls = results.map((res) => res.url)
 
-      const existingImages = Array.isArray(formData.images)
-        ? formData.images
-        : typeof formData.images === 'string' && formData.images.trim().length > 0
-          ? formData.images.split(',').map((s) => s.trim())
-          : formData.image_url
-            ? [formData.image_url]
-            : []
+      const existingImages = parseImagesList(formData.images, formData.image_url)
 
       const newImagesList = [...existingImages, ...uploadedUrls]
       const mainImageUrl = formData.image_url || newImagesList[0] || ''
@@ -107,11 +128,7 @@ export default function AdminPage() {
   }
 
   const handleRemoveImage = (indexToRemove) => {
-    const currentImages = Array.isArray(formData.images)
-      ? formData.images
-      : typeof formData.images === 'string' && formData.images.trim().length > 0
-        ? formData.images.split(',').map((s) => s.trim())
-        : []
+    const currentImages = parseImagesList(formData.images, formData.image_url)
 
     const updatedImages = currentImages.filter((_, idx) => idx !== indexToRemove)
     const updatedMainUrl =
@@ -227,12 +244,33 @@ export default function AdminPage() {
     setModalType(type)
     setEditingItem(item)
     if (item) {
-      setFormData({ ...item })
+      if (type === 'project') {
+        const imagesList = parseImagesList(item.images, item.image_url)
+        const techStackStr = Array.isArray(item.tech_stack)
+          ? item.tech_stack.join(', ')
+          : item.tech_stack || ''
+        setFormData({
+          ...item,
+          images: imagesList,
+          image_url: item.image_url || imagesList[0] || '',
+          tech_stack: techStackStr,
+        })
+      } else if (type === 'service') {
+        const featuresStr = Array.isArray(item.features)
+          ? item.features.join(', ')
+          : item.features || ''
+        setFormData({
+          ...item,
+          features: featuresStr,
+        })
+      } else {
+        setFormData({ ...item })
+      }
     } else {
       if (type === 'service') {
         setFormData({ icon: '⚡', title: '', description: '', features: '', popular: false })
       } else if (type === 'project') {
-        setFormData({ title: '', category: 'web', client: '', year: new Date().getFullYear(), tech_stack: '', image_url: '' })
+        setFormData({ title: '', category: 'web', client: '', year: new Date().getFullYear(), tech_stack: '', image_url: '', images: [] })
       } else if (type === 'testimonial') {
         setFormData({ name: '', position: '', company: '', content: '', rating: 5 })
       } else if (type === 'team') {
@@ -277,13 +315,8 @@ export default function AdminPage() {
           ? formData.tech_stack
           : []
 
-      const imagesArr = Array.isArray(formData.images)
-        ? formData.images
-        : typeof formData.images === 'string' && formData.images.trim().length > 0
-          ? formData.images.split(',').map((s) => s.trim()).filter(Boolean)
-          : formData.image_url
-            ? [formData.image_url]
-            : []
+      const imagesArr = parseImagesList(formData.images, formData.image_url)
+      const mainImageUrl = formData.image_url || imagesArr[0] || ''
 
       const payload = {
         title: formData.title,
@@ -292,7 +325,7 @@ export default function AdminPage() {
         client: formData.client || '',
         year: parseInt(formData.year) || new Date().getFullYear(),
         tech_stack: techStackArr,
-        image_url: formData.image_url || imagesArr[0] || '',
+        image_url: mainImageUrl,
         images: imagesArr,
         project_url: formData.project_url || '',
         featured: formData.featured || false,
@@ -1073,13 +1106,7 @@ export default function AdminPage() {
 
                       {/* Display Uploaded Thumbnails Grid */}
                       {(() => {
-                        const imagesList = Array.isArray(formData.images)
-                          ? formData.images
-                          : typeof formData.images === 'string' && formData.images.trim().length > 0
-                            ? formData.images.split(',').map((s) => s.trim())
-                            : formData.image_url
-                              ? [formData.image_url]
-                              : []
+                        const imagesList = parseImagesList(formData.images, formData.image_url)
 
                         if (imagesList.length === 0) return null
 

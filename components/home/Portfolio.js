@@ -607,9 +607,7 @@ export default function Portfolio({ projects = [], preview = false, hideHeader =
 
   // Sync when server-side props update
   useEffect(() => {
-    if (projects && projects.length > 0) {
-      setLoadedProjects(projects)
-    }
+    setLoadedProjects(projects || [])
   }, [projects])
 
   const availableProjects = loadedProjects.length > 0 ? loadedProjects : []

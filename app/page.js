@@ -3,6 +3,9 @@ import { getStats, getServices, getProjects, getTestimonials } from '@/lib/supab
 
 
 
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 export default async function HomePage() {
   // Fetch data from Supabase (server-side for SEO)
   const [stats, services, projects, testimonials] = await Promise.all([
