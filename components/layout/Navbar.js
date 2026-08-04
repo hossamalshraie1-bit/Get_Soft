@@ -12,6 +12,32 @@ const NAV_LINKS = [
   { href: '/contact', label: 'تواصل', icon: '💬' },
 ]
 
+function ThemeToggleBtn({ theme, onToggle, className = '' }) {
+  const isDark = theme === 'dark'
+  return (
+    <button
+      type="button"
+      onClick={onToggle}
+      className={`theme-toggle-btn ${className}`}
+      aria-label={isDark ? 'التبديل إلى الوضع النهاري' : 'التبديل إلى الوضع الليلي'}
+      title={isDark ? 'التحويل للوضع النهاري (Light Mode)' : 'التحويل للوضع الليلي (Dark Mode)'}
+    >
+      <div className={`theme-toggle-icon ${isDark ? 'dark' : 'light'}`}>
+        {isDark ? (
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="12" cy="12" r="4" fill="var(--gold-primary)" stroke="var(--gold-primary)" />
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="var(--gold-primary)" />
+          </svg>
+        ) : (
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="var(--gold-primary)" stroke="var(--gold-primary)" />
+          </svg>
+        )}
+      </div>
+    </button>
+  )
+}
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [theme, setTheme] = useState('dark')
@@ -60,13 +86,7 @@ export default function Navbar() {
             </Link>
 
             {/* Mobile Theme Toggle (only visible on mobile layout) */}
-            <button
-              onClick={toggleTheme}
-              className="theme-toggle-btn mobile-theme-btn"
-              aria-label="تبديل المظهر"
-            >
-              {theme === 'dark' ? '☀️' : '🌙'}
-            </button>
+            <ThemeToggleBtn theme={theme} onToggle={toggleTheme} className="mobile-theme-btn" />
           </div>
 
           {/* Desktop Nav */}
@@ -87,13 +107,7 @@ export default function Navbar() {
 
           {/* CTA Button & Desktop Theme Toggle */}
           <div className="navbar__actions" style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)' }}>
-            <button
-              onClick={toggleTheme}
-              className="theme-toggle-btn desktop-theme-btn"
-              aria-label="تبديل المظهر"
-            >
-              {theme === 'dark' ? '☀️' : '🌙'}
-            </button>
+            <ThemeToggleBtn theme={theme} onToggle={toggleTheme} className="desktop-theme-btn" />
             <Link href="/contact" className="btn btn-primary navbar__cta">
               ابدأ مشروعك
             </Link>

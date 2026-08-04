@@ -130,17 +130,16 @@ function ProjectCard({ project, index, onSelect }) {
           </div>
         )}
 
-        <div style={{ display: 'flex', gap: '8px', marginTop: techList.length > 0 ? 0 : 'auto' }}>
+        <div className="project-card__actions" style={{ marginTop: techList.length > 0 ? 0 : 'auto' }}>
           <button
             type="button"
-            className="btn btn-secondary btn--sm"
-            style={{ flex: 1, justifyContent: 'center', fontSize: '0.8rem', gap: '4px' }}
+            className="btn btn-secondary btn--sm project-card__btn-details"
             onClick={(e) => {
               e.stopPropagation()
               onSelect && onSelect(project)
             }}
           >
-            👁️ تفاصيل المشروع
+            👁️ التفاصيل
           </button>
 
           {project.project_url && (
@@ -148,8 +147,7 @@ function ProjectCard({ project, index, onSelect }) {
               href={project.project_url}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-primary btn--sm"
-              style={{ justifyContent: 'center', fontSize: '0.8rem', padding: '0 12px' }}
+              className="btn btn-primary btn--sm project-card__btn-visit"
               onClick={(e) => e.stopPropagation()}
               title="معاينة رابط المشروع المباشر"
             >
