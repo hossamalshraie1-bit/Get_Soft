@@ -136,23 +136,9 @@ const businessSchema = {
   name: 'جيت سوفت',
   alternateName: 'Get Soft',
   url: 'https://getsoft.vercel.app',
-  image: '/logo.png',
   logo: '/logo.png',
   description:
     'جيت سوفت - Get Soft — شركة برمجيات متخصصة في تطوير مواقع الويب، تطبيقات الجوال، الأنظمة المؤسسية وتصميم واجهات المستخدم.',
-  foundingDate: '2019',
-  address: {
-    '@type': 'PostalAddress',
-    addressLocality: 'صنعاء',
-    addressCountry: 'YE',
-  },
-  contactPoint: {
-    '@type': 'ContactPoint',
-    contactType: 'Customer Service',
-    telephone: '+967-776-158-797',
-    email: 'getsoft2025@gmail.com',
-    availableLanguage: ['Arabic'],
-  },
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
     name: 'خدمات جيت سوفت للبرمجة والتطوير',
