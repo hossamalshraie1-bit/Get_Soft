@@ -132,10 +132,11 @@ export const metadata = {
 // JSON-LD Structured Data — الاسم الرسمي: جيت سوفت | alternateName: Get Soft
 const businessSchema = {
   '@context': 'https://schema.org',
-  '@type': 'Organization',
+  '@type': 'LocalBusiness',
   name: 'جيت سوفت',
   alternateName: 'Get Soft',
   url: 'https://getsoft.vercel.app',
+  image: '/logo.png',
   logo: '/logo.png',
   description:
     'جيت سوفت - Get Soft — شركة برمجيات متخصصة في تطوير مواقع الويب، تطبيقات الجوال، الأنظمة المؤسسية وتصميم واجهات المستخدم.',
