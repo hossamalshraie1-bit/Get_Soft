@@ -153,20 +153,6 @@ const businessSchema = {
     email: 'getsoft2025@gmail.com',
     availableLanguage: ['Arabic'],
   },
-  sameAs: [
-    'https://twitter.com/getsoft2025',
-    'https://instagram.com/getsoft2025',
-    'https://linkedin.com/company/getsoft',
-  ],
-  serviceArea: {
-    '@type': 'GeoCircle',
-    geoMidpoint: {
-      '@type': 'GeoCoordinates',
-      latitude: 15.3694,
-      longitude: 44.1910,
-    },
-    geoRadius: '500000',
-  },
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
     name: 'خدمات جيت سوفت للبرمجة والتطوير',
@@ -193,11 +179,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="ar" dir="rtl">
       <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#080808" />
-        <meta name="msapplication-TileColor" content="#080808" />
-
         {/* Preconnect for performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
