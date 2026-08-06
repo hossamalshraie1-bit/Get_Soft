@@ -157,6 +157,15 @@ const businessSchema = {
     'https://instagram.com/getsoft2025',
     'https://linkedin.com/company/getsoft',
   ],
+  serviceArea: {
+    '@type': 'GeoCircle',
+    geoMidpoint: {
+      '@type': 'GeoCoordinates',
+      latitude: 15.3694,
+      longitude: 44.1910,
+    },
+    geoRadius: '500000',
+  },
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
     name: 'خدمات جيت سوفت للبرمجة والتطوير',
