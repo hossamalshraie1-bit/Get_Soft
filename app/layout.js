@@ -225,21 +225,25 @@ export const metadata = {
   metadataBase: new URL('https://getsoft.vercel.app'),
 
   title: {
-    default: 'Get Soft | للبرمجيات-تصميم مواقع الويب-تطبيقات الموبايل-انظمة ذكية',
-    template: '%s | Get Soft',
+    default: 'جيت سوفت | شركة برمجة مواقع وتطبيقات وأنظمة ذكية',
+    template: '%s | جيت سوفت',
   },
 
-  applicationName: 'جيت سوفت (Get Soft)',
+  applicationName: 'جيت سوفت',
   appleWebApp: {
-    title: 'Get Soft',
+    title: 'جيت سوفت',
     statusBarStyle: 'default',
     capable: true,
   },
-  
+
   description:
-    'Get Soft — أفضل شركة برمجيات متخصصة في تصميم وتطوير مواقع الويب الاحترافية، برمجة تطبيقات الجوال لـ Android و iOS، بناء الأنظمة المؤسسية الذكية، حلول التجارة الإلكترونية، وتصميم واجهات المستخدم (UI/UX) بأحدث التقنيات.',
+    'جيت سوفت - Get Soft — شركة برمجيات متخصصة في تصميم وتطوير مواقع الويب الاحترافية، برمجة تطبيقات الجوال لـ Android و iOS، بناء الأنظمة المؤسسية الذكية، حلول التجارة الإلكترونية، وتصميم واجهات المستخدم (UI/UX) بأحدث التقنيات.',
 
   keywords: [
+    'جيت سوفت',
+    'Get Soft',
+    'getsoft',
+    'جيت سوفت للبرمجيات',
     'شركة برمجيات',
     'شركة برمجة',
     'تصميم مواقع الويب',
@@ -272,14 +276,10 @@ export const metadata = {
     'دبي',
     'الكويت',
     'قطر',
-    'Get Soft',
-    'جيت سوفت',
-    'getsoft',
-    'get soft',
   ],
 
-  authors: [{ name: 'Get Soft', url: 'https://getsoft.vercel.app' }],
-  creator: 'Get Soft',
+  authors: [{ name: 'جيت سوفت', url: 'https://getsoft.vercel.app' }],
+  creator: 'جيت سوفت',
   publisher: 'جيت سوفت للبرمجيات',
 
   alternates: {
@@ -291,16 +291,16 @@ export const metadata = {
     type: 'website',
     locale: 'ar_YE',
     url: 'https://getsoft.vercel.app',
-    siteName: 'Get Soft | جيت سوفت',
-    title: 'Get Soft | شركة برمجيات وتصميم مواقع الويب والتطبيقات',
+    siteName: 'جيت سوفت',
+    title: 'جيت سوفت | شركة برمجة مواقع وتطبيقات وأنظمة ذكية',
     description:
-      'شركة برمجيات رائدة في تصميم وتطوير المواقع وتطبيقات الموبايل والانظمة المخصصة لتوسيع نطاق أعمالك وحضورك الرقمي.',
+      'جيت سوفت - Get Soft — شركة برمجيات رائدة في تصميم وتطوير المواقع وتطبيقات الموبايل والأنظمة المخصصة لتوسيع نطاق أعمالك وحضورك الرقمي.',
     images: [
       {
         url: '/logo.png',
         width: 800,
         height: 800,
-        alt: 'Get Soft — شركة برمجيات احترافية',
+        alt: 'جيت سوفت — شركة برمجيات احترافية',
       },
     ],
   },
@@ -309,9 +309,9 @@ export const metadata = {
     card: 'summary_large_image',
     site: '@getsoft_ye',
     creator: '@getsoft_ye',
-    title: 'Get Soft | شركة برمجيات وتصميم مواقع الويب',
+    title: 'جيت سوفت | شركة برمجة مواقع وتطبيقات',
     description:
-      'شركة برمجيات متخصصة في تطوير مواقع الويب، تطبيقات الجوال، والأنظمة المؤسسية.',
+      'جيت سوفت - Get Soft — شركة برمجيات متخصصة في تطوير مواقع الويب، تطبيقات الجوال، والأنظمة المؤسسية.',
     images: ['/logo.png'],
   },
 
@@ -349,17 +349,17 @@ export const metadata = {
   },
 }
 
-// JSON-LD Structured Data - تم ترقيته إلى LocalBusiness لكي يظهر كمعاينة مرئية في أداة جوجل
+// JSON-LD Structured Data — الاسم الرسمي: جيت سوفت | alternateName: Get Soft
 const businessSchema = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
-  name: 'Get Soft',
-  alternateName: 'جيت سوفت للبرمجيات',
+  name: 'جيت سوفت',
+  alternateName: 'Get Soft',
   url: 'https://getsoft.vercel.app',
   image: 'https://getsoft.vercel.app/logo.png',
   logo: 'https://getsoft.vercel.app/logo.png',
   description:
-    'شركة برمجيات متخصصة في تطوير مواقع الويب، تطبيقات الجوال، الأنظمة المؤسسية وتصميم واجهات المستخدم.',
+    'جيت سوفت - Get Soft — شركة برمجيات متخصصة في تطوير مواقع الويب، تطبيقات الجوال، الأنظمة المؤسسية وتصميم واجهات المستخدم.',
   foundingDate: '2019',
   address: {
     '@type': 'PostalAddress',
@@ -389,7 +389,7 @@ const businessSchema = {
   },
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
-    name: 'خدمات البرمجة والتطوير',
+    name: 'خدمات جيت سوفت للبرمجة والتطوير',
     itemListElement: [
       { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'تطوير مواقع الويب' } },
       { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'تطوير تطبيقات الجوال' } },
@@ -402,10 +402,10 @@ const businessSchema = {
 const websiteSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
-  name: 'Get Soft',
-  alternateName: 'جيت سوفت',
+  name: 'جيت سوفت',
+  alternateName: 'Get Soft',
   url: 'https://getsoft.vercel.app',
-  description: 'شركة برمجيات وتصميم مواقع الويب',
+  description: 'جيت سوفت - Get Soft — شركة برمجيات وتصميم مواقع الويب',
   inLanguage: 'ar',
 }
 

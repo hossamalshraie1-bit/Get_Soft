@@ -72,7 +72,7 @@ export default function Navbar() {
             <Link href="/" className="navbar__logo" aria-label="جيت سوفت - الصفحة الرئيسية">
               <img
                 src="/logo.png"
-                alt="Get Soft"
+                alt="جيت سوفت"
                 style={{
                   height: '42px',
                   width: '42px',
@@ -82,7 +82,7 @@ export default function Navbar() {
                   border: '1px solid var(--gold-border, rgba(201, 168, 76, 0.4))',
                 }}
               />
-              <h1 className="navbar__logo-text">Get Soft</h1>
+              <h1 className="navbar__logo-text">جيت سوفت</h1>
             </Link>
 
             {/* Mobile Theme Toggle (only visible on mobile layout) */}

@@ -2,13 +2,13 @@ import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 
 export const metadata = {
-  title: 'من نحن | Get Soft',
+  title: 'من نحن',
   description:
-    'تعرف على شركة Get Soft، قصة نجاحنا، قيمنا، ورؤيتنا في تقديم أفضل الحلول البرمجية وتصميم مواقع الويب وتطبيقات الموبايل بأعلى جودة.',
+    'جيت سوفت - Get Soft — تعرف على شركة جيت سوفت، قصة نجاحنا، قيمنا، ورؤيتنا في تقديم أفضل الحلول البرمجية وتصميم مواقع الويب وتطبيقات الموبايل بأعلى جودة.',
   alternates: { canonical: 'https://getsoft.vercel.app/about' },
   openGraph: {
-    title: 'من نحن | Get Soft',
-    description: 'تعرف على قصة نجاح وقيم وفريق عمل Get Soft للبرمجيات.',
+    title: 'جيت سوفت | من نحن',
+    description: 'جيت سوفت - Get Soft — تعرف على قصة نجاح وقيم وفريق عمل جيت سوفت للبرمجيات.',
     url: 'https://getsoft.vercel.app/about',
   },
 }
@@ -36,7 +36,7 @@ export default async function AboutPage() {
               ✨ قصة نجاحنا
             </div>
             <h1 id="about-heading" style={{ fontSize: 'clamp(2.5rem, 5vw, 3.5rem)', fontWeight: 900, marginBottom: 'var(--space-4)' }}>
-              من نحن - <span className="text-gradient">Get Soft</span>
+              من نحن - <span className="text-gradient">جيت سوفت</span>
             </h1>
             <div className="gold-divider" />
             <p style={{ fontSize: 'var(--font-size-lg)', color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto', lineHeight: 1.7 }}>
@@ -54,7 +54,7 @@ export default async function AboutPage() {
                   رؤيتنا <span className="text-gradient">ورسالتنا</span>
                 </h2>
                 <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-base)', lineHeight: 1.8, marginBottom: 'var(--space-4)' }}>
-                  في <strong>Get Soft</strong>، نسعى لأن نكون الشركة الرائدة في مجال تقديم الحلول البرمجية وتصميم المواقع وتطوير الأنظمة الذكية في العالم العربي. نؤمن بأن التقنية هي عصب الأعمال الحديثة، ولذلك نكرس جهودنا لتقديم منتجات تقنية تفوق توقعات عملائنا.
+                  في <strong>جيت سوفت</strong>، نسعى لأن نكون الشركة الرائدة في مجال تقديم الحلول البرمجية وتصميم المواقع وتطوير الأنظمة الذكية في العالم العربي. نؤمن بأن التقنية هي عصب الأعمال الحديثة، ولذلك نكرس جهودنا لتقديم منتجات تقنية تفوق توقعات عملائنا.
                 </p>
                 <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-base)', lineHeight: 1.8 }}>
                   رسالتنا هي تمكين الشركات والمشاريع الناشئة من التحول الرقمي الكامل والسلس من خلال توظيف أفضل الممارسات البرمجية وأحدث التقنيات لإنتاج برمجيات عالية الكفاءة والأمان والسرعة.

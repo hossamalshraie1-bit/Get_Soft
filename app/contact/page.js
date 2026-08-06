@@ -2,13 +2,13 @@ import ContactClient from '@/components/ContactClient'
 import { getSiteSettings } from '@/lib/supabase'
 
 export const metadata = {
-  title: 'تواصل معنا | Get Soft',
+  title: 'تواصل معنا',
   description:
-    'تواصل مع شركة Get Soft للبرمجيات . نحن هنا للإجابة على استفساراتك وتقديم استشارات مجانية حول تصميم المواقع، وتطوير التطبيقات والأنظمة.',
+    'جيت سوفت - Get Soft — تواصل مع شركة جيت سوفت للبرمجيات. نحن هنا للإجابة على استفساراتك وتقديم استشارات مجانية حول تصميم المواقع، وتطوير التطبيقات والأنظمة.',
   alternates: { canonical: 'https://getsoft.vercel.app/contact' },
   openGraph: {
-    title: 'تواصل معنا | Get Soft',
-    description: 'تواصل معنا الآن لمناقشة مشروعك الرقمي القادم والحصول على استشارة مجانية.',
+    title: 'جيت سوفت | تواصل معنا',
+    description: 'جيت سوفت - Get Soft — تواصل معنا الآن لمناقشة مشروعك الرقمي القادم والحصول على استشارة مجانية.',
     url: 'https://getsoft.vercel.app/contact',
   },
 }

@@ -4,13 +4,13 @@ import Services from '@/components/home/Services'
 import { getServices } from '@/lib/supabase'
 
 export const metadata = {
-  title: 'خدماتنا | Get Soft',
+  title: 'خدماتنا',
   description:
-    'اكتشف مجموعة خدماتنا التقنية الشاملة: تطوير مواقع الويب، تطبيقات الجوال، الأنظمة المؤسسية، تصميم UI/UX، التجارة الإلكترونية والاستضافة.',
+    'جيت سوفت - Get Soft — اكتشف مجموعة خدماتنا التقنية الشاملة: تطوير مواقع الويب، تطبيقات الجوال، الأنظمة المؤسسية، تصميم UI/UX، التجارة الإلكترونية والاستضافة.',
   alternates: { canonical: 'https://getsoft.vercel.app/services' },
   openGraph: {
-    title: 'خدماتنا | Get Soft',
-    description: 'خدمات برمجية متكاملة للشركات والمؤسسات.',
+    title: 'جيت سوفت | خدماتنا',
+    description: 'جيت سوفت - Get Soft — خدمات برمجية متكاملة للشركات والمؤسسات.',
     url: 'https://getsoft.vercel.app/services',
   },
 }

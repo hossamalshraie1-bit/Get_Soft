@@ -1,12 +1,12 @@
 export async function GET() {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://getsoft.vercel.app'
-  const pubDate = new Date().toUTCString()
+  const pubDate = new Date().toISOString()
 
   const routes = [
     {
       title: 'جيت سوفت | الرئيسية',
       url: `${baseUrl}`,
-      description: 'جيت سوفت - Get Soft — شركة برمجيات متخصصة في تطوير مواقع الويب وتطبيقات الجوال والأنظمة المؤسسية.',
+      description: 'جيت سوفت - Get Soft — شركة برمجيات متخصصة في تصميم وتطوير مواقع الويب الاحترافية وتطبيقات الجوال والأنظمة المؤسسية.',
     },
     {
       title: 'جيت سوفت | خدماتنا',
@@ -33,31 +33,33 @@ export async function GET() {
   const itemsXml = routes
     .map(
       (item) => `
-    <item>
+    <entry>
       <title><![CDATA[${item.title}]]></title>
-      <link>${item.url}</link>
-      <description><![CDATA[${item.description}]]></description>
-      <pubDate>${pubDate}</pubDate>
-      <guid>${item.url}</guid>
-    </item>`
+      <link href="${item.url}" />
+      <id>${item.url}</id>
+      <updated>${pubDate}</updated>
+      <summary><![CDATA[${item.description}]]></summary>
+    </entry>`
     )
     .join('')
 
-  const rssFeed = `<?xml version="1.0" encoding="UTF-8" ?>
-<rss version="2.0">
-  <channel>
-    <title>جيت سوفت للبرمجيات</title>
-    <link>${baseUrl}</link>
-    <description>خلاصة صفحات التوجيه والمشاريع لشركة جيت سوفت</description>
-    <language>ar-SA</language>
-    <lastBuildDate>${pubDate}</lastBuildDate>
+  const atomFeed = `<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>جيت سوفت للبرمجيات</title>
+  <subtitle>خلاصة صفحات التوجيه والمشاريع لشركة جيت سوفت</subtitle>
+  <link href="${baseUrl}/atom.xml" rel="self" />
+  <link href="${baseUrl}" />
+  <id>${baseUrl}/</id>
+  <updated>${pubDate}</updated>
+  <author>
+    <name>جيت سوفت</name>
+  </author>
 ${itemsXml}
-  </channel>
-</rss>`
+</feed>`
 
-  return new Response(rssFeed, {
+  return new Response(atomFeed, {
     headers: {
-      'Content-Type': 'text/xml',
+      'Content-Type': 'application/atom+xml; charset=utf-8',
     },
   })
 }

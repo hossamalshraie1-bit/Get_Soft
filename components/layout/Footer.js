@@ -27,7 +27,7 @@ export default function Footer() {
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
               <img
                 src="/logo.png"
-                alt="Get Soft Logo"
+                alt="جيت سوفت Logo"
                 style={{
                   height: '44px',
                   width: '44px',
@@ -37,7 +37,7 @@ export default function Footer() {
                   border: '1px solid var(--gold-border, rgba(201, 168, 76, 0.4))',
                 }}
               />
-              <div className="footer__brand-name" style={{ marginBottom: 0 }}>Get Soft</div>
+              <div className="footer__brand-name" style={{ marginBottom: 0 }}>جيت سوفت</div>
             </div>
             <p className="footer__brand-desc">
               شركة برمجيات متخصصة في تطوير مواقع الويب الاحترافية، تطبيقات الجوال، الأنظمة المؤسسية وتصميم واجهات المستخدم. نبني حلولاً رقمية تصنع الفارق.
@@ -147,7 +147,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="footer__bottom">
           <p className="footer__copyright">
-            © {currentYear} <strong style={{ color: 'var(--gold-primary)' }}>Get Soft</strong>. جميع الحقوق محفوظة.
+            © {currentYear} <strong style={{ color: 'var(--gold-primary)' }}>جيت سوفت</strong>. جميع الحقوق محفوظة.
           </p>
           <div style={{ display: 'flex', gap: 'var(--space-6)' }}>
             <Link href="/privacy" style={{ fontSize: 'var(--font-size-sm)', color: 'var(--text-muted)', transition: 'color var(--transition-fast)' }}>
