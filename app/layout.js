@@ -140,6 +140,11 @@ const businessSchema = {
   description:
     'جيت سوفت - Get Soft — شركة برمجيات متخصصة في تطوير مواقع الويب، تطبيقات الجوال، الأنظمة المؤسسية وتصميم واجهات المستخدم.',
   foundingDate: '2019',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'صنعاء',
+    addressCountry: 'YE',
+  },
   contactPoint: {
     '@type': 'ContactPoint',
     contactType: 'Customer Service',
