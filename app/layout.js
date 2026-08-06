@@ -69,6 +69,7 @@ export const metadata = {
 
   openGraph: {
     type: 'website',
+    locale: 'ar_YE',
     url: 'https://getsoft.vercel.app',
     siteName: 'جيت سوفت',
     title: 'جيت سوفت | شركة برمجة مواقع وتطبيقات وأنظمة ذكية',
@@ -133,10 +134,24 @@ const businessSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: 'جيت سوفت',
+  alternateName: 'Get Soft',
   url: 'https://getsoft.vercel.app',
   logo: '/logo.png',
   description:
     'جيت سوفت - Get Soft — شركة برمجيات متخصصة في تطوير مواقع الويب، تطبيقات الجوال، الأنظمة المؤسسية وتصميم واجهات المستخدم.',
+  foundingDate: '2019',
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'Customer Service',
+    telephone: '+967-776-158-797',
+    email: 'getsoft2025@gmail.com',
+    availableLanguage: ['Arabic'],
+  },
+  sameAs: [
+    'https://twitter.com/getsoft2025',
+    'https://instagram.com/getsoft2025',
+    'https://linkedin.com/company/getsoft',
+  ],
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
     name: 'خدمات جيت سوفت للبرمجة والتطوير',
