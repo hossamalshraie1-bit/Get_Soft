@@ -4,7 +4,6 @@ import Footer from '@/components/layout/Footer'
 export const metadata = {
   title: 'سياسة الخصوصية',
   description: 'جيت سوفت - Get Soft — سياسة الخصوصية وحماية البيانات لشركة جيت سوفت للبرمجيات وتصميم المواقع.',
-  robots: { index: false, follow: true }, // عادة لا نريد أرشفة هذه الصفحات ولكن نريد تتبع الروابط
 }
 
 export default function PrivacyPage() {
