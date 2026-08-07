@@ -1,184 +1,105 @@
 import './globals.css'
 import ScrollReveal from '@/components/layout/ScrollReveal'
+import JsonLd from '@/components/JsonLd'
 
-export const metadata = {
-  metadataBase: new URL('https://getsoft.vercel.app'),
+const BASE_URL = 'https://getsoft.vercel.app'
 
-  title: {
-    default: 'جيت سوفت | شركة برمجة مواقع وتطبيقات وأنظمة ذكية',
-    template: '%s | جيت سوفت',
-  },
+export async function generateMetadata({ params }) {
+  const locale = (await params)?.locale || 'ar'
+  const isAr = locale === 'ar'
 
-  applicationName: 'جيت سوفت',
-  appleWebApp: {
-    title: 'جيت سوفت',
-    statusBarStyle: 'default',
-    capable: true,
-  },
-
-  description:
-    'جيت سوفت - Get Soft — شركة برمجيات متخصصة في تصميم وتطوير مواقع الويب الاحترافية، برمجة تطبيقات الجوال لـ Android و iOS، بناء الأنظمة المؤسسية الذكية، حلول التجارة الإلكترونية، وتصميم واجهات المستخدم (UI/UX) بأحدث التقنيات.',
-
-  keywords: [
-    'جيت سوفت',
-    'Get Soft',
-    'getsoft',
-    'جيت سوفت للبرمجيات',
-    'شركة برمجيات',
-    'شركة برمجة',
-    'تصميم مواقع الويب',
-    'تطوير مواقع',
-    'تصميم مواقع الكترونية',
-    'مبرمج مواقع',
-    'برمجة تطبيقات',
-    'تطبيقات الموبايل',
-    'تطبيقات الجوال',
-    'تطبيقات اندرويد',
-    'تطبيقات ايفون',
-    'تصميم متجر الكتروني',
-    'حلول برمجية',
-    'تطوير النظم',
-    'أنظمة مؤسسية',
-    'أنظمة ذكية',
-    'تصميم واجهات المستخدم',
-    'شركة تصميم مواقع',
-    'تصميم UI UX',
-    'Next.js',
-    'React',
-    'برمجة احترافية',
-    'شركة تقنية',
-    'صنعاء',
-    'اليمن',
-    'الجمهورية اليمنية',
-    'السعودية',
-    'الرياض',
-    'الامارات',
-    'دبي',
-    'الكويت',
-    'قطر',
-  ],
-
-  authors: [{ name: 'جيت سوفت', url: 'https://getsoft.vercel.app' }],
-  creator: 'جيت سوفت',
-  publisher: 'جيت سوفت للبرمجيات',
-
-  alternates: {
-    canonical: 'https://getsoft.vercel.app',
-    languages: { 'ar-YE': 'https://getsoft.vercel.app' },
-  },
-
-  openGraph: {
-    type: 'website',
-    locale: 'ar_YE',
-    url: 'https://getsoft.vercel.app',
-    siteName: 'جيت سوفت',
-    title: 'جيت سوفت | شركة برمجة مواقع وتطبيقات وأنظمة ذكية',
-    description:
-      'جيت سوفت - Get Soft — شركة برمجيات رائدة في تصميم وتطوير المواقع وتطبيقات الموبايل والأنظمة المخصصة لتوسيع نطاق أعمالك وحضورك الرقمي.',
-    images: [
-      {
-        url: '/logo.png',
-        width: 800,
-        height: 800,
-        alt: 'جيت سوفت — شركة برمجيات احترافية',
-      },
-    ],
-  },
-
-  twitter: {
-    card: 'summary_large_image',
-    site: '@getsoft_ye',
-    creator: '@getsoft_ye',
-    title: 'جيت سوفت | شركة برمجة مواقع وتطبيقات',
-    description:
-      'جيت سوفت - Get Soft — شركة برمجيات متخصصة في تطوير مواقع الويب، تطبيقات الجوال، والأنظمة المؤسسية.',
-    images: ['/logo.png'],
-  },
-
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
+  return {
+    metadataBase: new URL(BASE_URL),
+    title: {
+      default: isAr
+        ? 'جيت سوفت | شركة برمجة مواقع وتطبيقات وأنظمة ذكية'
+        : 'Get Soft | Web Development & Smart Systems Company',
+      template: isAr ? '%s | جيت سوفت' : '%s | Get Soft',
+    },
+    description: isAr
+      ? 'جيت سوفت - Get Soft — شركة برمجيات متخصصة في تصميم وتطوير مواقع الويب الاحترافية، برمجة تطبيقات الجوال، الأنظمة المؤسسية الذكية، حلول التجارة الإلكترونية وتصميم واجهات المستخدم UI/UX.'
+      : 'Get Soft — A software company specializing in professional web design, mobile app development, smart enterprise systems, e-commerce solutions, and UI/UX design.',
+    keywords: isAr
+      ? [
+        'جيت سوفت', 'Get Soft', 'getsoft', 'جيت سوفت للبرمجيات',
+        'شركة برمجيات', 'شركة برمجة', 'تصميم مواقع الويب', 'تطوير مواقع',
+        'تطبيقات الموبايل', 'تطبيقات الجوال', 'تطبيقات اندرويد', 'تطبيقات ايفون',
+        'تصميم متجر الكتروني', 'أنظمة مؤسسية', 'أنظمة ذكية', 'تصميم UI UX',
+        'صنعاء', 'اليمن', 'السعودية', 'الامارات', 'الكويت', 'قطر',
+      ]
+      : [
+        'Get Soft', 'getsoft', 'software company', 'web development',
+        'web design', 'mobile apps', 'android apps', 'ios apps',
+        'e-commerce', 'enterprise systems', 'smart systems', 'UI UX design',
+        'Next.js', 'React', 'professional programming', 'tech company',
+        'Sanaa', 'Yemen', 'Saudi Arabia', 'UAE', 'Kuwait', 'Qatar',
+      ],
+    alternates: {
+      canonical: '/',
+      languages: { ar: '/ar', en: '/en' },
+    },
+    verification: {
+      google: 'google7464326adc760ed7',
+    },
+    robots: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
     },
-  },
-
-  icons: {
-    icon: [
-      { url: '/favicon.ico', sizes: 'any' },
-      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
-      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
-      { url: '/android-chrome-192x192.png', sizes: '192x192', type: 'image/png' },
-      { url: '/android-chrome-512x512.png', sizes: '512x512', type: 'image/png' },
-    ],
-    apple: [
-      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
-      { url: '/apple-touch-icon-precomposed.png', sizes: '180x180', type: 'image/png' },
-    ],
-    shortcut: ['/favicon.ico'],
-  },
-
-  manifest: '/manifest.json',
-
-  verification: {
-    google: 'google7464326adc760ed7',
-  },
+    openGraph: {
+      type: 'website',
+      locale: isAr ? 'ar_YE' : 'en_US',
+      siteName: isAr ? 'جيت سوفت' : 'Get Soft',
+      title: isAr
+        ? 'جيت سوفت | شركة برمجة مواقع وتطبيقات وأنظمة ذكية'
+        : 'Get Soft | Web & Mobile App Development Company',
+      description: isAr
+        ? 'جيت سوفت - Get Soft — شركة برمجيات رائدة في تصميم وتطوير المواقع وتطبيقات الموبايل والأنظمة المخصصة.'
+        : 'Get Soft — A leading software company in web and mobile app design and development.',
+      images: [
+        {
+          url: '/logo.png',
+          width: 800,
+          height: 800,
+          alt: isAr ? 'شعار جيت سوفت' : 'Get Soft Logo',
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: isAr
+        ? 'جيت سوفت | شركة برمجة مواقع وتطبيقات'
+        : 'Get Soft | Web & Mobile App Development Company',
+      description: isAr
+        ? 'جيت سوفت - Get Soft — شركة برمجيات متخصصة في تطوير مواقع الويب وتطبيقات الجوال.'
+        : 'Get Soft — A software company specializing in web and mobile app development.',
+      images: ['/logo.png'],
+    },
+    icons: {
+      icon: '/favicon.ico',
+      apple: '/apple-touch-icon.png',
+    },
+    manifest: '/manifest.json',
+  }
 }
 
-// JSON-LD Structured Data — الاسم الرسمي: جيت سوفت | alternateName: Get Soft
-const businessSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
-  name: 'جيت سوفت',
-  alternateName: 'Get Soft',
-  url: 'https://getsoft.vercel.app',
-  logo: '/logo.png',
-  description:
-    'جيت سوفت - Get Soft — شركة برمجيات متخصصة في تطوير مواقع الويب، تطبيقات الجوال، الأنظمة المؤسسية وتصميم واجهات المستخدم.',
-  hasOfferCatalog: {
-    '@type': 'OfferCatalog',
-    name: 'خدمات جيت سوفت للبرمجة والتطوير',
-    itemListElement: [
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'تطوير مواقع الويب' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'تطوير تطبيقات الجوال' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'تطوير الأنظمة المؤسسية' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'تصميم UI/UX' } },
-    ],
-  },
-}
+export default async function RootLayout({ children, params }) {
+  const locale = (await params)?.locale || 'ar'
+  const dir = locale === 'ar' ? 'rtl' : 'ltr'
 
-const websiteSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'WebSite',
-  name: 'جيت سوفت',
-  alternateName: 'Get Soft',
-  url: 'https://getsoft.vercel.app',
-  description: 'جيت سوفت - Get Soft — شركة برمجيات وتصميم مواقع الويب',
-  inLanguage: 'ar',
-}
-
-export default function RootLayout({ children }) {
   return (
-    <html lang="ar" dir="rtl">
+    <html lang={locale} dir={dir}>
       <head>
-        {/* Preconnect for performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://ik.imagekit.io" />
-
-        {/* Structured Data */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(businessSchema) }}
-        />
+        <JsonLd />
       </head>
       <body>
         <ScrollReveal />
