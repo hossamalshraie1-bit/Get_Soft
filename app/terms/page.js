@@ -4,7 +4,6 @@ import Footer from '@/components/layout/Footer'
 export const metadata = {
   title: 'شروط الاستخدام',
   description: 'جيت سوفت - Get Soft — شروط وأحكام استخدام موقع شركة جيت سوفت للبرمجيات وتصميم المواقع.',
-  robots: { index: false, follow: true },
 }
 
 export default function TermsPage() {
